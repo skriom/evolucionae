@@ -160,6 +160,9 @@ namespace Evolucionae
        
         private void btnSalir_Click(object sender, EventArgs e)
         {
+            /**asdasdadasd*/
+            int borrar;
+
             string message = "¿Está seguro que desea salir?";
             string caption = "Salir";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
