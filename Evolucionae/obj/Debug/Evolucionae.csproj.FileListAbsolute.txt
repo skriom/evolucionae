@@ -52,3 +52,6 @@ C:\Documents and Settings\a52566\Desktop\Evolucionae\Evolucionae\obj\Debug\Resol
 C:\Documents and Settings\a52566\Desktop\Evolucionae\Evolucionae\obj\Debug\Evolucionae.Form1.resources
 C:\Documents and Settings\a52566\Desktop\Evolucionae\Evolucionae\obj\Debug\Evolucionae.Properties.Resources.resources
 C:\Documents and Settings\a52566\Desktop\Evolucionae\Evolucionae\obj\Debug\Evolucionae.csproj.GenerateResource.Cache
+E:\Evolucionae\Evolucionae\bin\Debug\Evolucionae.exe.config
+E:\Evolucionae\Evolucionae\obj\Debug\Evolucionae.exe
+E:\Evolucionae\Evolucionae\obj\Debug\Evolucionae.pdb
