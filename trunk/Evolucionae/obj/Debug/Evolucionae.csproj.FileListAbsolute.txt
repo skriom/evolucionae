@@ -55,3 +55,12 @@ C:\Documents and Settings\a52566\Desktop\Evolucionae\Evolucionae\obj\Debug\Evolu
 E:\Evolucionae\Evolucionae\bin\Debug\Evolucionae.exe.config
 E:\Evolucionae\Evolucionae\obj\Debug\Evolucionae.exe
 E:\Evolucionae\Evolucionae\obj\Debug\Evolucionae.pdb
+H:\Evolucionae\Evolucionae\bin\Debug\Evolucionae.exe.config
+H:\Evolucionae\Evolucionae\obj\Debug\Evolucionae.exe
+H:\Evolucionae\Evolucionae\obj\Debug\Evolucionae.pdb
+H:\Evolucionae\Evolucionae\bin\Debug\Evolucionae.exe
+H:\Evolucionae\Evolucionae\bin\Debug\Evolucionae.pdb
+H:\Evolucionae\Evolucionae\obj\Debug\ResolveAssemblyReference.cache
+H:\Evolucionae\Evolucionae\obj\Debug\Evolucionae.Form1.resources
+H:\Evolucionae\Evolucionae\obj\Debug\Evolucionae.Properties.Resources.resources
+H:\Evolucionae\Evolucionae\obj\Debug\Evolucionae.csproj.GenerateResource.Cache
