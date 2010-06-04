@@ -137,12 +137,69 @@ namespace Evolucionae
         /// no puede tener un valor mayor que k-1</remarks>
         public int[] generarSolucionAleatoria()
         {
+            int random = 0;
+            Random r = new Random(DateTime.Now.Millisecond);
             int[] solucion = new int[this.numCursosNecesita];
+
+            for (int i = 0; i < this.numCursosNecesita; ++i)
+            {
+                solucion[i]=-1;
+            }
+
             for (int i = 0; i < this.numCursosNecesita; ++i)
             {
 
+                random = r.Next(this.cursosTipo[this.persona.cursosQueNecesita.ElementAt(i)].Count);
+
+
+
+
             }
             return solucion;
+        }
+        /*
+   for (int i = 0; i < this.numCursosNecesita; ++i )
+       {
+
+   string nombreC = persona.cursosQueNecesita.ElementAt(i).nombre;
+   List<Cursos> listaC= cursoTipo["nombreC"];
+   int a = random(); //0 - listaC.count
+         
+    * Curso c= cursoTipo["nombreC"][a];
+    if(!chocaCurso(c)){
+       solucion.add()
+         
+    } else{
+         * 
+         * 
+         * 
+         * 
+         * }
+       
+    * }
+  
+    */
+        private Boolean chocaCurso(int curso, int[] solucion, int posicion)
+        {
+            Boolean resultado=false;
+
+            
+             if(posicion !=0){           
+                  for(int i=0; i< posicion-1; i++){
+
+
+
+                   /*if(c.dia== solucion[i].dia ){
+                       if(c.hora==solucion[i].hora){
+                       return true;
+                       }*/
+                     }
+                    
+              }
+             
+
+            return resultado;
+
         }
         /// <summary>
         /// Genera la población, es decir, llena la estructura this.soluciones
