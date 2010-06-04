@@ -150,49 +150,36 @@ namespace Evolucionae
             {
 
                 random = r.Next(this.cursosTipo[this.persona.cursosQueNecesita.ElementAt(i)].Count);
-
-
+                Curso c = this.cursosTipo[this.persona.cursosQueNecesita.ElementAt(i)][random];
+                
+                if(!this.chocaCurso(c, solucion, i)){
+                    solucion[i]=random;
+         
+                 }
 
 
             }
             return solucion;
         }
-        /*
-   for (int i = 0; i < this.numCursosNecesita; ++i )
-       {
 
-   string nombreC = persona.cursosQueNecesita.ElementAt(i).nombre;
-   List<Cursos> listaC= cursoTipo["nombreC"];
-   int a = random(); //0 - listaC.count
-         
-    * Curso c= cursoTipo["nombreC"][a];
-    if(!chocaCurso(c)){
-       solucion.add()
-         
-    } else{
-         * 
-         * 
-         * 
-         * 
-         * }
-       
-    * }
-  
-    */
-        private Boolean chocaCurso(int curso, int[] solucion, int posicion)
+        private Boolean chocaCurso(Curso c, int[] solucion, int posicion)
         {
             Boolean resultado=false;
-
+            int diferenciaHoras = 0;
             
              if(posicion !=0){           
                   for(int i=0; i< posicion-1; i++){
 
-
-
-                   /*if(c.dia== solucion[i].dia ){
-                       if(c.hora==solucion[i].hora){
-                       return true;
-                       }*/
+                      if (c.dia == this.cursosTipo[this.persona.cursosQueNecesita.ElementAt(i)][solucion[i]].dia)
+                      {
+                          //La diferencia de horas(valor absoluto) entre cursos debe ser mayor o igual a 2,
+                          diferenciaHoras = Math.Abs(c.hora - this.cursosTipo[this.persona.cursosQueNecesita.ElementAt(i)][solucion[i]].hora);
+                          if (c.hora == this.cursosTipo[this.persona.cursosQueNecesita.ElementAt(i)][solucion[i]].hora || (diferenciaHoras<2))
+                          {
+                              resultado = true;
+                          }
+                      
+                       }
                      }
                     
               }
