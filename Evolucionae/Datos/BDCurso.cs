@@ -14,6 +14,8 @@ namespace Evolucionae
         DataSetCursos datasetCursos;
         Evolucionae.Dataset.DataSetCursosTableAdapters.CursoTableAdapter cursoAdapter;
         Evolucionae.Dataset.DataSetCursosTableAdapters.obtenerListaCursos listaCursosAdapter;
+        Evolucionae.Dataset.DataSetCursosTableAdapters.obtenerNombreCursos nombreCursosAdapter;
+
 
         public BDCurso()
 	{
@@ -23,6 +25,7 @@ namespace Evolucionae
         datasetCursos = new DataSetCursos();
         cursoAdapter = new Evolucionae.Dataset.DataSetCursosTableAdapters.CursoTableAdapter();
         listaCursosAdapter = new Evolucionae.Dataset.DataSetCursosTableAdapters.obtenerListaCursos();
+        nombreCursosAdapter = new Evolucionae.Dataset.DataSetCursosTableAdapters.obtenerNombreCursos();
 	}
 
     //<<>> resultado:=eliminarCurso
@@ -46,6 +49,13 @@ namespace Evolucionae
         return listaCursos;
     }
 
+    public DataTable solicitaNombreCursos()
+    {
+        DataTable nombreCursos = this.nombreCursosAdapter.solicitarNombreCursos();
+        return nombreCursos;
+    }
+
+    
     public bool insertarCurso(Curso c)
     {
         int afectados = 0;
