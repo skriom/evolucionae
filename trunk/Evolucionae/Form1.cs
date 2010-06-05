@@ -66,6 +66,7 @@ namespace Evolucionae
             person.cursosQueNecesita.Add("mineria");
 
             AG1 ag1 = new AG1(person, this.cursos);
+            ag1.generarPoblacionInicial();
 
         }
         private void cargarComboCursos()
