@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tbCursos = new System.Windows.Forms.TabControl();
             this.tbInsertar = new System.Windows.Forms.TabPage();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.grpBxPersona = new System.Windows.Forms.GroupBox();
             this.gbCursosP = new System.Windows.Forms.GroupBox();
             this.cmbCursos = new System.Windows.Forms.ComboBox();
@@ -41,6 +41,9 @@
             this.btnAgregarPersona = new System.Windows.Forms.Button();
             this.txtNombreP = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.ListaP = new System.Windows.Forms.ListBox();
+            this.ListaC = new System.Windows.Forms.ListBox();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.grpBxCursos = new System.Windows.Forms.GroupBox();
             this.cmbListo = new System.Windows.Forms.Button();
             this.btnInsertarC = new System.Windows.Forms.Button();
@@ -53,48 +56,57 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbSoluciones = new System.Windows.Forms.TabPage();
-            this.ListaC = new System.Windows.Forms.ListBox();
-            this.ListaP = new System.Windows.Forms.ListBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataSetPersona = new Evolucionae.Dataset.DataSetPersona();
+            this.obtenerListaPersonasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.obtenerListaPersonas = new Evolucionae.Dataset.DataSetPersonaTableAdapters.obtenerListaPersonas();
+            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvHorario = new System.Windows.Forms.DataGridView();
+            this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dia0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dia1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dia2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dia3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dia4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbCursos.SuspendLayout();
             this.tbInsertar.SuspendLayout();
             this.grpBxPersona.SuspendLayout();
             this.gbCursosP.SuspendLayout();
             this.grpBxCursos.SuspendLayout();
             this.tbSoluciones.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetPersona)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.obtenerListaPersonasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHorario)).BeginInit();
             this.SuspendLayout();
             // 
             // tbCursos
             // 
             this.tbCursos.Controls.Add(this.tbInsertar);
             this.tbCursos.Controls.Add(this.tbSoluciones);
+            this.tbCursos.Controls.Add(this.tabPage1);
             this.tbCursos.Location = new System.Drawing.Point(1, 2);
             this.tbCursos.Name = "tbCursos";
             this.tbCursos.SelectedIndex = 0;
-            this.tbCursos.Size = new System.Drawing.Size(723, 525);
+            this.tbCursos.Size = new System.Drawing.Size(709, 589);
             this.tbCursos.TabIndex = 0;
             // 
             // tbInsertar
             // 
-            this.tbInsertar.Controls.Add(this.btnSalir);
             this.tbInsertar.Controls.Add(this.grpBxPersona);
+            this.tbInsertar.Controls.Add(this.ListaP);
+            this.tbInsertar.Controls.Add(this.ListaC);
+            this.tbInsertar.Controls.Add(this.btnSalir);
             this.tbInsertar.Controls.Add(this.grpBxCursos);
             this.tbInsertar.Location = new System.Drawing.Point(4, 22);
             this.tbInsertar.Name = "tbInsertar";
             this.tbInsertar.Padding = new System.Windows.Forms.Padding(3);
             this.tbInsertar.Size = new System.Drawing.Size(715, 499);
             this.tbInsertar.TabIndex = 0;
-            this.tbInsertar.Text = "Insertar";
+            this.tbInsertar.Text = "Cursos";
             this.tbInsertar.UseVisualStyleBackColor = true;
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(310, 402);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(117, 62);
-            this.btnSalir.TabIndex = 19;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // grpBxPersona
             // 
@@ -103,10 +115,10 @@
             this.grpBxPersona.Controls.Add(this.btnAgregarPersona);
             this.grpBxPersona.Controls.Add(this.txtNombreP);
             this.grpBxPersona.Controls.Add(this.label5);
-            this.grpBxPersona.Location = new System.Drawing.Point(6, 171);
+            this.grpBxPersona.Location = new System.Drawing.Point(6, 172);
             this.grpBxPersona.Name = "grpBxPersona";
-            this.grpBxPersona.Size = new System.Drawing.Size(554, 212);
-            this.grpBxPersona.TabIndex = 9;
+            this.grpBxPersona.Size = new System.Drawing.Size(499, 212);
+            this.grpBxPersona.TabIndex = 26;
             this.grpBxPersona.TabStop = false;
             this.grpBxPersona.Text = "Persona";
             this.grpBxPersona.Visible = false;
@@ -141,7 +153,7 @@
             this.btnListo.TabIndex = 27;
             this.btnListo.Text = "Listo";
             this.btnListo.UseVisualStyleBackColor = true;
-            this.btnListo.Click += new System.EventHandler(this.btnListo_Click);
+            this.btnListo.Click += new System.EventHandler(this.btnListo_Click_1);
             // 
             // label6
             // 
@@ -158,9 +170,9 @@
             this.btnInsertarP.Name = "btnInsertarP";
             this.btnInsertarP.Size = new System.Drawing.Size(75, 23);
             this.btnInsertarP.TabIndex = 26;
-            this.btnInsertarP.Text = "Insertar";
+            this.btnInsertarP.Text = "Agregar";
             this.btnInsertarP.UseVisualStyleBackColor = true;
-            this.btnInsertarP.Click += new System.EventHandler(this.btnInsertarP_Click);
+            this.btnInsertarP.Click += new System.EventHandler(this.btnInsertarP_Click_1);
             // 
             // btnAtras
             // 
@@ -170,7 +182,7 @@
             this.btnAtras.TabIndex = 18;
             this.btnAtras.Text = "Atrás";
             this.btnAtras.UseVisualStyleBackColor = true;
-            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
+            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click_1);
             // 
             // btnAgregarPersona
             // 
@@ -178,9 +190,9 @@
             this.btnAgregarPersona.Name = "btnAgregarPersona";
             this.btnAgregarPersona.Size = new System.Drawing.Size(75, 23);
             this.btnAgregarPersona.TabIndex = 17;
-            this.btnAgregarPersona.Text = "Agregar";
+            this.btnAgregarPersona.Text = "Insertar";
             this.btnAgregarPersona.UseVisualStyleBackColor = true;
-            this.btnAgregarPersona.Click += new System.EventHandler(this.btnAgregarPersona_Click);
+            this.btnAgregarPersona.Click += new System.EventHandler(this.btnAgregarPersona_Click_1);
             // 
             // txtNombreP
             // 
@@ -198,6 +210,32 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "Nombre:";
             // 
+            // ListaP
+            // 
+            this.ListaP.FormattingEnabled = true;
+            this.ListaP.Location = new System.Drawing.Point(542, 172);
+            this.ListaP.Name = "ListaP";
+            this.ListaP.Size = new System.Drawing.Size(158, 199);
+            this.ListaP.TabIndex = 25;
+            // 
+            // ListaC
+            // 
+            this.ListaC.FormattingEnabled = true;
+            this.ListaC.Location = new System.Drawing.Point(542, 6);
+            this.ListaC.Name = "ListaC";
+            this.ListaC.Size = new System.Drawing.Size(158, 160);
+            this.ListaC.TabIndex = 24;
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(310, 402);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(117, 62);
+            this.btnSalir.TabIndex = 19;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // grpBxCursos
             // 
             this.grpBxCursos.Controls.Add(this.cmbListo);
@@ -212,10 +250,11 @@
             this.grpBxCursos.Controls.Add(this.label4);
             this.grpBxCursos.Location = new System.Drawing.Point(6, 6);
             this.grpBxCursos.Name = "grpBxCursos";
-            this.grpBxCursos.Size = new System.Drawing.Size(554, 159);
+            this.grpBxCursos.Size = new System.Drawing.Size(499, 159);
             this.grpBxCursos.TabIndex = 8;
             this.grpBxCursos.TabStop = false;
             this.grpBxCursos.Text = "Cursos";
+            this.grpBxCursos.Enter += new System.EventHandler(this.grpBxCursos_Enter);
             // 
             // cmbListo
             // 
@@ -329,40 +368,118 @@
             // 
             // tbSoluciones
             // 
-            this.tbSoluciones.Controls.Add(this.ListaC);
-            this.tbSoluciones.Controls.Add(this.ListaP);
+            this.tbSoluciones.Controls.Add(this.dataGridView1);
             this.tbSoluciones.Location = new System.Drawing.Point(4, 22);
             this.tbSoluciones.Name = "tbSoluciones";
             this.tbSoluciones.Padding = new System.Windows.Forms.Padding(3);
             this.tbSoluciones.Size = new System.Drawing.Size(715, 499);
             this.tbSoluciones.TabIndex = 1;
-            this.tbSoluciones.Text = "Generar horario";
+            this.tbSoluciones.Text = "Personas";
             this.tbSoluciones.UseVisualStyleBackColor = true;
             // 
-            // ListaC
+            // tabPage1
             // 
-            this.ListaC.FormattingEnabled = true;
-            this.ListaC.Location = new System.Drawing.Point(275, 15);
-            this.ListaC.Name = "ListaC";
-            this.ListaC.Size = new System.Drawing.Size(189, 225);
-            this.ListaC.TabIndex = 23;
+            this.tabPage1.Controls.Add(this.dgvHorario);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(701, 563);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Horarios";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // ListaP
+            // dataGridView1
             // 
-            this.ListaP.FormattingEnabled = true;
-            this.ListaP.Location = new System.Drawing.Point(7, 15);
-            this.ListaP.Name = "ListaP";
-            this.ListaP.Size = new System.Drawing.Size(189, 225);
-            this.ListaP.TabIndex = 21;
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nombreDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.obtenerListaPersonasBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(20, 19);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(249, 135);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // dataSetPersona
+            // 
+            this.dataSetPersona.DataSetName = "DataSetPersona";
+            this.dataSetPersona.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // obtenerListaPersonasBindingSource
+            // 
+            this.obtenerListaPersonasBindingSource.DataMember = "obtenerListaPersonas";
+            this.obtenerListaPersonasBindingSource.DataSource = this.dataSetPersona;
+            // 
+            // obtenerListaPersonas
+            // 
+            this.obtenerListaPersonas.ClearBeforeFill = true;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            // 
+            // dgvHorario
+            // 
+            this.dgvHorario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHorario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Hora,
+            this.Dia0,
+            this.Dia1,
+            this.Dia2,
+            this.Dia3,
+            this.Dia4});
+            this.dgvHorario.Location = new System.Drawing.Point(7, 6);
+            this.dgvHorario.Name = "dgvHorario";
+            this.dgvHorario.Size = new System.Drawing.Size(646, 439);
+            this.dgvHorario.TabIndex = 0;
+            // 
+            // Hora
+            // 
+            this.Hora.HeaderText = "Hora";
+            this.Hora.Name = "Hora";
+            this.Hora.ReadOnly = true;
+            // 
+            // Dia0
+            // 
+            this.Dia0.HeaderText = "Lunes";
+            this.Dia0.Name = "Dia0";
+            this.Dia0.ReadOnly = true;
+            // 
+            // Dia1
+            // 
+            this.Dia1.HeaderText = "Martes";
+            this.Dia1.Name = "Dia1";
+            this.Dia1.ReadOnly = true;
+            // 
+            // Dia2
+            // 
+            this.Dia2.HeaderText = "Miercoles";
+            this.Dia2.Name = "Dia2";
+            this.Dia2.ReadOnly = true;
+            // 
+            // Dia3
+            // 
+            this.Dia3.HeaderText = "Jueves";
+            this.Dia3.Name = "Dia3";
+            this.Dia3.ReadOnly = true;
+            // 
+            // Dia4
+            // 
+            this.Dia4.HeaderText = "Viernes";
+            this.Dia4.Name = "Dia4";
+            this.Dia4.ReadOnly = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(768, 578);
+            this.ClientSize = new System.Drawing.Size(795, 590);
             this.Controls.Add(this.tbCursos);
             this.Name = "Form1";
             this.Text = "Principal";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tbCursos.ResumeLayout(false);
             this.tbInsertar.ResumeLayout(false);
             this.grpBxPersona.ResumeLayout(false);
@@ -372,6 +489,11 @@
             this.grpBxCursos.ResumeLayout(false);
             this.grpBxCursos.PerformLayout();
             this.tbSoluciones.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetPersona)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.obtenerListaPersonasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHorario)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -392,19 +514,32 @@
         private System.Windows.Forms.GroupBox grpBxCursos;
         private System.Windows.Forms.Button btnInsertarC;
         private System.Windows.Forms.Button cmbListo;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.ListBox ListaP;
+        private System.Windows.Forms.ListBox ListaC;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox grpBxPersona;
+        private System.Windows.Forms.GroupBox gbCursosP;
+        private System.Windows.Forms.ComboBox cmbCursos;
+        private System.Windows.Forms.Button btnListo;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnInsertarP;
         private System.Windows.Forms.Button btnAtras;
         private System.Windows.Forms.Button btnAgregarPersona;
         private System.Windows.Forms.TextBox txtNombreP;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnListo;
-        private System.Windows.Forms.Button btnInsertarP;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cmbCursos;
-        private System.Windows.Forms.GroupBox gbCursosP;
-        private System.Windows.Forms.ListBox ListaP;
-        private System.Windows.Forms.ListBox ListaC;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private Evolucionae.Dataset.DataSetPersona dataSetPersona;
+        private System.Windows.Forms.BindingSource obtenerListaPersonasBindingSource;
+        private Evolucionae.Dataset.DataSetPersonaTableAdapters.obtenerListaPersonas obtenerListaPersonas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView dgvHorario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Hora;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dia0;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dia1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dia2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dia3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dia4;
     }
 }
 
