@@ -5,7 +5,8 @@
     }
 }
 
-namespace Evolucionae.DataSetCursosTableAdapters {
+namespace Evolucionae.Dataset.DataSetCursosTableAdapters
+{
     
     
     public partial class obtenerListaCursos {

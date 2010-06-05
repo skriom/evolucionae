@@ -13,7 +13,7 @@ namespace Evolucionae
     public partial class Form1 : Form
     {
         HashSet<String> cursosP = new HashSet<String>();
-        HashSet<Curso> cursos = new HashSet<Curso>();
+        List<Curso> cursos = new List<Curso>();
         HashSet<Persona> personas = new HashSet<Persona>();
         //Persona p = new Persona();
         //Curso c = new Curso();
@@ -38,7 +38,7 @@ namespace Evolucionae
             cargarPersonas();
             imprimirListaCursos();
             imprimirListaPersonas();
-            //this.pruebaTonta();
+            this.pruebaTonta();
         }
 
         public void pruebaTonta()
