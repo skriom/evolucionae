@@ -27,7 +27,7 @@ namespace Evolucionae
         /// </summary>
         /// <remarks>El número de soluciones que se generarán para la persona
         /// es menor o igual que MAX_SOLUCIONES*PORCENTAJE_SOLUCIONES/100</remarks>
-        public readonly int MAX_SOLUCIONES;
+        private int MAX_SOLUCIONES;
         /// <summary>
         /// Diccionario que mapea cada tipo de curso (e.g. "inglés", "matemáticas")
         /// a la lista de cursos de ese tipo disponibles.
@@ -67,6 +67,20 @@ namespace Evolucionae
             this.cursosTipo = new Dictionary<string, List<Curso>>();
             this.soluciones = new List<int[]>();
             this.initCursosTipo();
+            this.setMaxNumeroSoluciones();
+        }
+        /// <summary>
+        /// Calcula una cota superior (tan pequeña como sea posible) del número máximo
+        /// de soluciones posibles para la persona y la asigna a this.MAX_SOLUCIONES
+        /// </summary>
+        private void setMaxNumeroSoluciones()
+        {
+            int resultado = 1;
+            foreach (string curso in this.persona.cursosQueNecesita)
+            {
+                resultado *= this.cursosTipo[curso].Count;
+            }
+            this.MAX_SOLUCIONES = resultado;
         }
         /// <summary>
         /// Construye la estructura cursosTipo.
@@ -168,7 +182,7 @@ namespace Evolucionae
             int diferenciaHoras = 0;
             
              if(posicion !=0){           
-                  for(int i=0; i< posicion-1; i++){
+                  for(int i=0; i< posicion; i++){
 
                       if (c.dia == this.cursosTipo[this.persona.cursosQueNecesita.ElementAt(i)][solucion[i]].dia)
                       {
