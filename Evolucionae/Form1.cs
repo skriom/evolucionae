@@ -31,13 +31,14 @@ namespace Evolucionae
         public Form1()
         {
             InitializeComponent();
+
             //this.pruebaTonta();
             cargarCursos();
             cargarComboCursos();
             cargarPersonas();
             imprimirListaCursos();
             imprimirListaPersonas();
-           
+            //this.pruebaTonta();
         }
 
         public void pruebaTonta()
