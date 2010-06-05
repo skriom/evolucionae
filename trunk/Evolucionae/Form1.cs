@@ -31,12 +31,13 @@ namespace Evolucionae
         public Form1()
         {
             InitializeComponent();
+            //this.pruebaTonta();
             cargarCursos();
             cargarComboCursos();
             cargarPersonas();
             imprimirListaCursos();
             imprimirListaPersonas();
-            this.pruebaTonta();
+           
         }
 
         public void pruebaTonta()
@@ -46,34 +47,49 @@ namespace Evolucionae
             this.cursos.Add(cur);
             cur = new Curso(idActual++, "paradigmas", 2, MARTES, 9);
             this.cursos.Add(cur);
+
             cur = new Curso(idActual++, "bases", 1, LUNES, 11);
             this.cursos.Add(cur);
+    
             cur = new Curso(idActual++, "bases", 2, LUNES, 1);
             this.cursos.Add(cur);
+  
             cur = new Curso(idActual++, "redes", 2, MARTES, 7);
             this.cursos.Add(cur);
+ 
             cur = new Curso(idActual++, "io", 1, LUNES, 7);
             this.cursos.Add(cur);
+
             cur = new Curso(idActual++, "io", 1, MARTES, 7);
             this.cursos.Add(cur);
+
             cur = new Curso(idActual++, "mineria", 1, LUNES, 11);
             this.cursos.Add(cur);
+
             idActual = 0;
             Persona person = new Persona(idActual++, "Fabian");
             person.cursosQueNecesita.Add("paradigmas");
             person.cursosQueNecesita.Add("bases");
             person.cursosQueNecesita.Add("io");
             person.cursosQueNecesita.Add("mineria");
-
+            bdp.insertarPersona(person);
             AG1 ag1 = new AG1(person, this.cursos);
             ag1.generarPoblacionInicial();
 
         }
         private void cargarComboCursos()
         {
-           for (int i = 0; i < cursos.Count; i++) {
-               cmbCursos.Items.Add(cursos.ElementAt(i).nombre);
+            String nombre;
+            DataTable dt = bdc.solicitaNombreCursos();
+            Array lista;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                lista = dt.Rows[i].ItemArray;
+                nombre = (string)lista.GetValue(0);
+                cmbCursos.Items.Add(nombre);
+
             }
+
         }
         
         private void cargarCursos()
@@ -92,6 +108,7 @@ namespace Evolucionae
                 cursos.Add(c);
             }
         }
+
         private void cargarPersonas()
         {
             personas = bdp.listaPersonasCompletas();
@@ -109,6 +126,7 @@ namespace Evolucionae
 
 
         }
+        
         private void imprimirListaPersonas()
         {
             this.ListaP.Items.Clear();
@@ -155,6 +173,8 @@ namespace Evolucionae
             c.hora = Convert.ToInt32(cmbHora.Text);
 
             bdc.insertarCurso(c);
+
+            
             
 
         }
