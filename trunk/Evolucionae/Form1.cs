@@ -119,6 +119,7 @@ namespace Evolucionae
         private void imprimirListaCursos()
         {
             this.ListaC.Items.Clear();
+            this.limpiarListBox(ListaC);
             for (int i = 0; i < cursos.Count; i++)
             {
                 this.ListaC.Items.Add(cursos.ElementAt(i).nombre + "-D: " + cursos.ElementAt(i).dia + "-H: " + cursos.ElementAt(i).hora);
@@ -126,6 +127,15 @@ namespace Evolucionae
             }
 
 
+        }
+        private void limpiarListBox(ListBox Lista) {
+
+            for (int i = 0; i < Lista.Items.Count; i++ )
+            {
+                Lista.Items.RemoveAt(i);
+
+            }
+        
         }
         
         private void imprimirListaPersonas()
@@ -145,19 +155,22 @@ namespace Evolucionae
             this.txtCupo.Text = "";
             this.txtNombre.Text = "";
             //this.cmbCursos.SelectedIndex = 0;
-            this.cmbDia.SelectedIndex = 0;
+            this.cmbDia.SelectedText = "";
+            this.cmbHora.SelectedText = "";
         }
 
         #region "Botones"
         private void cmbListo_Click(object sender, EventArgs e)
         {
-           
+            //Se actuliza el combo de cursos hasta que termine de ingresar todos los cursos
+            this.cargarComboCursos();
             grpBxPersona.Visible = true;
             grpBxCursos.Visible = false;
-           
+            this.limpiar();
+                      
         }
 
-        private void btnAtras_Click(object sender, EventArgs e)
+        private void btnAtras_Click_1(object sender, EventArgs e)
         {
             grpBxCursos.Visible = true;
             grpBxPersona.Visible = false;
@@ -166,7 +179,8 @@ namespace Evolucionae
 
         private void btnInsertarC_Click(object sender, EventArgs e)
         {
-           
+            if (validarEspacios())
+            {
             Curso c = new Curso();
             c.nombre = txtNombre.Text;
             c.cupo = Convert.ToInt32(txtCupo.Text);
@@ -175,9 +189,39 @@ namespace Evolucionae
 
             bdc.insertarCurso(c);
 
+            //Actualiza la lista de cursos, y refresca la lista
+            this.cargarCursos();
+            imprimirListaCursos();
+           
+           }else{
+
+               MessageBox.Show("Debe llenar todos los campos", "Insertar curso");
+           }
+            
             
             
 
+        }
+        private Boolean validarEspacios() {
+            Boolean completos = true;
+            if (txtNombre.Text.Trim()=="")
+            {
+             completos=false;
+             }
+            if (txtCupo.Text.Trim() == "")
+            {
+                completos = false;
+            }
+            if (cmbDia.SelectedText.Trim() == "")
+            {
+                completos = false;
+            }
+            if (cmbHora.SelectedText.Trim() == "")
+            {
+                completos = false;
+            }
+            return completos;
+        
         }
        
         private void btnSalir_Click(object sender, EventArgs e)
@@ -201,7 +245,7 @@ namespace Evolucionae
             
         }
 
-        private void btnInsertarP_Click(object sender, EventArgs e)
+        private void btnInsertarP_Click_1(object sender, EventArgs e)
         {
 
             //if (contador < cant)
@@ -219,14 +263,24 @@ namespace Evolucionae
             this.cmbCursos.Text="";
         }
 
-        private void btnAgregarPersona_Click(object sender, EventArgs e)
+        private void btnAgregarPersona_Click_1(object sender, EventArgs e)
         {
             //contador = 0;
             //cant = Convert.ToInt32(cmbCant.SelectedItem);
-            gbCursosP.Enabled = true;
+            if (txtNombreP.Text != "")
+            {
+
+                gbCursosP.Enabled = true;
+            }
+            else {
+
+                MessageBox.Show("Debe ingresar un nombre", "Insertar persona");
+            
+            }
+            
         }
 
-        private void btnListo_Click(object sender, EventArgs e)
+        private void btnListo_Click_1(object sender, EventArgs e)
         {
             
             Persona p = new Persona();
@@ -250,6 +304,42 @@ namespace Evolucionae
         {
 
         }
+
+        private void grpBxCursos_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'dataSetPersona.obtenerListaPersonas' table. You can move, or remove it, as needed.
+            this.obtenerListaPersonas.Fill(this.dataSetPersona.obtenerListaPersonas);
+
+        }
+
+        private void inicializarGridHorario() {
+
+
+            String celda;
+            int hora= 7;
+            DataGridViewCell dgc = new DataGridViewButtonCell();
+            //Recorremos el DataGridView con un bucle for
+            //dataGridView1.Rows. = 13;
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                dgvHorario.Rows[i].Cells[0].Value= hora;
+                celda = ((String)dgc.Value) + "\r\n";
+                //textBox1.Text += celda.Replace(".", ",");
+                hora++;
+            }
+        
+        
+        }
+
+      
+
+        
+       
 
        
 
