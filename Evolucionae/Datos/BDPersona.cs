@@ -71,13 +71,13 @@ namespace Evolucionae
         }
         
         //Solicita la lista de cursos para lapesona que se le envia como parametro
-        public HashSet<String> listaCursosPersona(string nombre)
+        public List<String> listaCursosPersona(string nombre)
         {
 
             //string nombreC;
             datatablePersona = consultarCursosPersona(nombre);
 
-            HashSet<String> listacursosPersona = new HashSet<String>();
+            List<String> listacursosPersona = new List<String>();
 
            Array lista;
 

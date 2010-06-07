@@ -9,18 +9,18 @@ namespace Evolucionae
     {
         int _id;
         String _nombre;
-        HashSet<String> _cursosQueNecesita;
+        List<String> _cursosQueNecesita;
 
         public Persona()
         {
-            this._cursosQueNecesita = new HashSet<string>();
+            this._cursosQueNecesita = new List<string>();
         }
 
         public Persona(int id, string nombre)
         {
             this._id = id;
             this._nombre = nombre;
-            this._cursosQueNecesita = new HashSet<string>();
+            this._cursosQueNecesita = new List<string>();
         }
 
         public int id
@@ -35,7 +35,7 @@ namespace Evolucionae
             set { _nombre = value; }
         }
 
-        public HashSet<String> cursosQueNecesita
+        public List<String> cursosQueNecesita
         {
             get { return _cursosQueNecesita; }
             set { _cursosQueNecesita = value; }

@@ -12,7 +12,7 @@ namespace Evolucionae
 {
     public partial class Form1 : Form
     {
-        HashSet<String> cursosP = new HashSet<String>();
+        List<String> cursosP = new List<String>();
         List<Curso> cursos = new List<Curso>();
         HashSet<Persona> personas = new HashSet<Persona>();
         //Persona p = new Persona();
@@ -48,35 +48,28 @@ namespace Evolucionae
             this.cursos.Add(cur);
             cur = new Curso(idActual++, "paradigmas", 2, MARTES, 9);
             this.cursos.Add(cur);
-
             cur = new Curso(idActual++, "bases", 1, LUNES, 11);
             this.cursos.Add(cur);
-    
-            cur = new Curso(idActual++, "bases", 2, LUNES, 1);
+            cur = new Curso(idActual++, "bases", 2, LUNES, 13);
             this.cursos.Add(cur);
-  
             cur = new Curso(idActual++, "redes", 2, MARTES, 7);
             this.cursos.Add(cur);
- 
             cur = new Curso(idActual++, "io", 1, LUNES, 7);
             this.cursos.Add(cur);
-
             cur = new Curso(idActual++, "io", 1, MARTES, 7);
             this.cursos.Add(cur);
-
             cur = new Curso(idActual++, "mineria", 1, LUNES, 11);
             this.cursos.Add(cur);
-
             idActual = 0;
             Persona person = new Persona(idActual++, "Fabian");
-            person.cursosQueNecesita.Add("paradigmas");
+            //person.cursosQueNecesita.Add("paradigmas");
             person.cursosQueNecesita.Add("bases");
             person.cursosQueNecesita.Add("io");
             person.cursosQueNecesita.Add("mineria");
             bdp.insertarPersona(person);
             AG1 ag1 = new AG1(person, this.cursos);
             ag1.generarPoblacionInicial();
-
+            ag1.evolucionar();
         }
         private void cargarComboCursos()
         {
