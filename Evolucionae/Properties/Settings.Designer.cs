@@ -36,7 +36,7 @@ namespace Evolucionae.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=bd;Initial Catalog=Paradigmas;User ID=BD2_GRUPO1_G2;Password=Irregula" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=BD;Initial Catalog=Paradigmas;User ID=BD2_GRUPO1_G2;Password=Irregula" +
             "res1")]
         public string ParadigmasConnectionString {
             get {
