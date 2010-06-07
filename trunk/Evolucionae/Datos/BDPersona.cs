@@ -42,11 +42,26 @@ namespace Evolucionae
             return afectados == 1;
         }
 
+        public bool eliminarPersona(String nombre)
+        {
+            int afectados = 0;
+            try
+            {
+                afectados= this.personaAdapter.EliminarPersona(nombre);
+             
+
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return afectados == 1;
+        }
         
         //Devuelve un hashset con todas las personas ingresada en la BD
-        public HashSet<Persona> listaPersonasCompletas()
+        public List<Persona> listaPersonasCompletas()
         {
-            HashSet<Persona> listaP = new HashSet<Persona>();
+            List<Persona> listaP = new List<Persona>();
             Persona p;
             String nombreP; 
             DataTable dt = solicitaListaNombreP();

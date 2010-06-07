@@ -82,6 +82,17 @@ C:\Documents and Settings\a41585\Desktop\Evolutionae\Evolucionae\obj\Debug\Evolu
 C:\Documents and Settings\a41585\Desktop\Evolutionae\Evolucionae\obj\Debug\Evolucionae.csproj.GenerateResource.Cache
 C:\Documents and Settings\a41585\Desktop\Evolutionae\Evolucionae\bin\Debug\Evolucionae.exe
 C:\Documents and Settings\a41585\Desktop\Evolutionae\Evolucionae\bin\Debug\Evolucionae.pdb
+<<<<<<< .mine
+C:\Documents and Settings\Administrador\Escritorio\Evolutionae\Evolucionae\bin\Debug\Evolucionae.exe.config
+C:\Documents and Settings\Administrador\Escritorio\Evolutionae\Evolucionae\obj\Debug\Evolucionae.exe
+C:\Documents and Settings\Administrador\Escritorio\Evolutionae\Evolucionae\obj\Debug\Evolucionae.pdb
+C:\Documents and Settings\Administrador\Escritorio\Evolutionae\Evolucionae\bin\Debug\Evolucionae.exe
+C:\Documents and Settings\Administrador\Escritorio\Evolutionae\Evolucionae\bin\Debug\Evolucionae.pdb
+C:\Documents and Settings\Administrador\Escritorio\Evolutionae\Evolucionae\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Escritorio\Evolutionae\Evolucionae\obj\Debug\Evolucionae.Form1.resources
+C:\Documents and Settings\Administrador\Escritorio\Evolutionae\Evolucionae\obj\Debug\Evolucionae.Properties.Resources.resources
+C:\Documents and Settings\Administrador\Escritorio\Evolutionae\Evolucionae\obj\Debug\Evolucionae.csproj.GenerateResource.Cache
+=======
 C:\Documents and Settings\Propietario\Escritorio\evolast\Evolucionae\bin\Debug\Evolucionae.exe.config
 C:\Documents and Settings\Propietario\Escritorio\evolast\Evolucionae\obj\Debug\Evolucionae.exe
 C:\Documents and Settings\Propietario\Escritorio\evolast\Evolucionae\obj\Debug\Evolucionae.pdb
@@ -100,3 +111,4 @@ C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\obj\Debug\ResolveAssemb
 C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\obj\Debug\Evolucionae.Form1.resources
 C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\obj\Debug\Evolucionae.Properties.Resources.resources
 C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\obj\Debug\Evolucionae.csproj.GenerateResource.Cache
+>>>>>>> .r14

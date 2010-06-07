@@ -5,7 +5,8 @@
     }
 }
 
-namespace Evolucionae.DataSetPersonaTableAdapters {
+namespace Evolucionae.Dataset.DataSetPersonaTableAdapters
+{
     partial class obtenerListaPersonas
     {
     }

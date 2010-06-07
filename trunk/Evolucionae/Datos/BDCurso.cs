@@ -29,12 +29,12 @@ namespace Evolucionae
 	}
 
     //<<>> resultado:=eliminarCurso
-    public bool eliminarCurso(string nombre, int dia, int hora) 
+    public bool eliminarCurso(Curso c) 
     { 
         bool resultado = false;
         try
         {
-            resultado = this.cursoAdapter.EliminarCurso(nombre, dia, hora) == 1;
+            resultado = this.cursoAdapter.EliminarCurso(c.nombre, c.dia, c.hora, c.cupo) == 1;
         }
         catch (Exception e)
         {
@@ -49,12 +49,34 @@ namespace Evolucionae
         return listaCursos;
     }
 
+    //Devuelve un hashset con todas las personas ingresada en la BD
+    public List<Curso> listaCursosCompletas()
+    {
+        List<Curso> listaC = new List<Curso>();
+        Curso c;
+        String nombreC;
+        DataTable dt = solicitaListaCursos();
+        Array lista;
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            c = new Curso();
+            lista = dt.Rows[i].ItemArray;
+            c.nombre = (string)lista.GetValue(0);
+            c.dia = (int)lista.GetValue(1);
+            c.hora = (int)lista.GetValue(2);
+            c.cupo = (int)lista.GetValue(3);
+
+            listaC.Add(c);
+        }
+        return listaC;
+    }
     public DataTable solicitaNombreCursos()
     {
         DataTable nombreCursos = this.nombreCursosAdapter.solicitarNombreCursos();
         return nombreCursos;
     }
 
+    
     
     public bool insertarCurso(Curso c)
     {
@@ -69,7 +91,6 @@ namespace Evolucionae
         }
         return afectados == 1;
     }
-
 
 
     public DataSetCursos.CursoDataTable consultarDatosCurso(String nombre)
