@@ -43,7 +43,7 @@ namespace Evolucionae
             cargarComboPersonas();
 
             //imprimirListaPersonas();
-            //this.pruebaTonta();
+            this.pruebaTonta();
             this.inicializarGridHorario();
         }
 
