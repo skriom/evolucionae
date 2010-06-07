@@ -380,6 +380,7 @@ namespace Evolucionae
                 bdp.eliminarPersona(nombre.ToString());
                 this.cargarPersonas();
                 this.obtenerListaPersonas.Fill(this.dataSetPersona.obtenerListaPersonas);
+                this.ListaP.Items.Clear();
 
             }
 
@@ -409,10 +410,14 @@ namespace Evolucionae
             object cupo = dgvCursos.Rows[e.RowIndex].Cells[3].Value;
             cursoBorrar.cupo= Convert.ToInt32(cupo);
             bdc.eliminarCurso(cursoBorrar);
+            bdp.eliminarPersonaPorCurso(cursoBorrar.nombre);
             //Se actuliza el combo de cursos hasta que termine de ingresar todos los cursos
             this.cargarCursos();
             this.obtenerListaCursos.Fill(this.dataSetCursos.obtenerListaCursos);
             this.cargarComboCursos();
+            this.cargarPersonas();
+            this.obtenerListaPersonas.Fill(this.dataSetPersona.obtenerListaPersonas);
+            this.ListaP.Items.Clear();
             this.limpiar();
 
             }

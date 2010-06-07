@@ -31,7 +31,7 @@ namespace Evolucionae
             {
                 for(int i=0; i<p.cursosQueNecesita.Count(); i++){
                 
-                afectados = this.personaAdapter.InsertarPersona(p.nombre,p.cursosQueNecesita.ElementAt(i).ToString() );
+                afectados = this.personaAdapter.insertarPersona(p.nombre,p.cursosQueNecesita.ElementAt(i).ToString() );
                 }
                 
             }
@@ -47,7 +47,7 @@ namespace Evolucionae
             int afectados = 0;
             try
             {
-                afectados= this.personaAdapter.EliminarPersona(nombre);
+                afectados= this.personaAdapter.eliminarPersona(nombre);
              
 
             }
@@ -57,7 +57,24 @@ namespace Evolucionae
             }
             return afectados == 1;
         }
-        
+
+
+        public bool eliminarPersonaPorCurso(String nombreC)
+        {
+            int afectados = 0;
+            try
+            {
+                afectados = this.personaAdapter.eliminarPersonaPorCurso(nombreC);
+
+
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return afectados == 1;
+        }
+
         //Devuelve un hashset con todas las personas ingresada en la BD
         public List<Persona> listaPersonasCompletas()
         {
