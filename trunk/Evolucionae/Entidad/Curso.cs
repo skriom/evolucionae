@@ -6,7 +6,7 @@ using System.Text;
 namespace Evolucionae
 {
 
-    class Curso
+    class Curso : IComparable<Curso>
     {
         private int _id;
         private string _nombre;
@@ -55,7 +55,27 @@ namespace Evolucionae
             get { return _hora; }
             set { _hora = value; }
         }
+        #region IComparable<Curso> Members
+        public int CompareTo(Curso otro)
+        {
+            /* LEGEND
+            * < 0 means that this object is less than other
+            * 0 means that both objects are equal
+            * > 0 means that this object is greater than other
+            * */
 
+            int resultado = 1;
+            if (otro._dia > this._dia)
+            {
+                resultado = -1;
+            }
+            else if (otro._dia == this._dia)
+            {
+                resultado = this._hora.CompareTo(otro._hora);
+            }
+            return resultado;
+        }
+        #endregion
 
     }
 }
