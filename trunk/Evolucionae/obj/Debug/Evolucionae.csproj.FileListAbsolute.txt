@@ -91,3 +91,12 @@ C:\Documents and Settings\Propietario\Escritorio\evolast\Evolucionae\obj\Debug\R
 C:\Documents and Settings\Propietario\Escritorio\evolast\Evolucionae\obj\Debug\Evolucionae.Form1.resources
 C:\Documents and Settings\Propietario\Escritorio\evolast\Evolucionae\obj\Debug\Evolucionae.Properties.Resources.resources
 C:\Documents and Settings\Propietario\Escritorio\evolast\Evolucionae\obj\Debug\Evolucionae.csproj.GenerateResource.Cache
+C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\bin\Debug\Evolucionae.exe.config
+C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\obj\Debug\Evolucionae.exe
+C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\obj\Debug\Evolucionae.pdb
+C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\bin\Debug\Evolucionae.exe
+C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\bin\Debug\Evolucionae.pdb
+C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\obj\Debug\Evolucionae.Form1.resources
+C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\obj\Debug\Evolucionae.Properties.Resources.resources
+C:\Documents and Settings\a52566\Desktop\evo\Evolucionae\obj\Debug\Evolucionae.csproj.GenerateResource.Cache
