@@ -215,7 +215,25 @@ namespace Evolucionae
         }
         /// <summary>
         /// Modifica la lista de soluciones, insertando en ella elementos cada vez mejores
-        /// según 
+        /// según la función de fitness, todo esto siguiendo un modelo de algoritmo genético.
+        /// Se efectúan 30 iteraciones, en cada una de las cuales se hace lo siguiente:
+        /// <list type="bullet">
+        /// <item>
+        /// Se calcula el fitness de cada elemento de la población actual
+        /// </item>
+        /// <item>
+        /// Se asocia una probabilidad a cada elemento de la población actual, proporcional a
+        /// su fitness
+        /// </item>
+        /// <item>
+        /// Se escogen aleatoriamente (sin reemplazo, de modo que puedan salir repetidos, esa
+        /// es la idea) this.soluciones.Count elementos, según la probabilidad asociada de cada
+        /// uno (de modo que se repitan más aquellos con mayor fitness)
+        /// </item>
+        /// <item>
+        /// Los elementos escogidos 
+        /// </item>
+        /// </list>
         /// </summary>
         public void evolucionar()
         {
@@ -263,11 +281,22 @@ namespace Evolucionae
             //x = calificación de este rubro que vale 70%
             //Tenemos: n/70 = s/x => x = 70s/n. Nótese s = n => x = 70
             int s = 0;
+            bool[] dia = {false, false, false, false, false};
+            Dictionary<int, List<Curso>> cursosDia = new Dictionary<int, List<Curso>>();
+            Curso cursoAsignadoActual;
             for (int i = 0; i < individuo.Length; ++i)
             {
                 if (individuo[i] != -1)
                 {
                     s += 1;
+                    cursoAsignadoActual = this.cursosTipo[this.persona.cursosQueNecesita.ElementAt(i)][individuo[i]];
+                    dia[cursoAsignadoActual.dia] = true;
+                    //si cursosDia no lo contiene, insértelo
+                    if (!cursosDia.ContainsKey(cursoAsignadoActual.dia))
+                    {
+                        cursosDia.Add(cursoAsignadoActual.dia, new List<Curso>());
+                    }
+                    cursosDia[cursoAsignadoActual.dia].Add(cursoAsignadoActual);
                 }
             }
             resultado += 70.0 * s / individuo.Length;
@@ -283,44 +312,13 @@ namespace Evolucionae
             //  0-|        \
             //    -----------
             //      1 2 3 4 5
-            bool[] dia = new bool[5];
-            for (int i = 0; i < individuo.Length; ++i)
-            {
-                if(individuo[i] != -1)
-                {
-                    dia[this.cursosTipo[this.persona.cursosQueNecesita.ElementAt(i)][individuo[i]].dia] = true;
-                }
-            }
-            int numeroDiasUsados = 0;
-            for (int i = 0; i < dia.Length; ++i)
-            {
-                if (dia[i])
-                {
-                    numeroDiasUsados++;
-                }
-            }
-            resultado += -5 * numeroDiasUsados + 25;
+            resultado += -5 * cursosDia.Count + 25;
             //calcular cajones de cada día: este rubro vale 10%
             //lo más grande que puede ser el cajón de un día es 11 horas
             //(entrar de 7 a 9, cajón, y luego de 20 a 22). Como son 5 días
             //en la semana, cada uno puede hacer perder hasta 2 puntos.
             //Entonces, si x es la medida del cajón de un día (en horas), los
             //puntos de este 10% que hace perder son 2x/11
-            Dictionary<int, List<Curso>> cursosDia = new Dictionary<int, List<Curso>>();
-            Curso cursoAsignadoActual;
-            for (int i = 0; i < individuo.Length; i++)
-            {
-                if (individuo[i] != -1)
-                {
-                    cursoAsignadoActual = this.cursosTipo[this.persona.cursosQueNecesita.ElementAt(i)][individuo[i]];
-                    //si no lo contiene, insértelo
-                    if (!cursosDia.ContainsKey(cursoAsignadoActual.dia))
-                    {
-                        cursosDia.Add(cursoAsignadoActual.dia, new List<Curso>());
-                    }
-                    cursosDia[cursoAsignadoActual.dia].Add(cursoAsignadoActual);
-                }
-            }
             resultado += 10;
             foreach (int llave in cursosDia.Keys)
             {
