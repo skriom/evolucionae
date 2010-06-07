@@ -199,6 +199,17 @@ namespace Evolucionae
 			return resultado;
         }
         /// <summary>
+        /// Indica si una solución presenta choques de horarios
+        /// </summary>
+        /// <param name="individuo">solución en la que se buscarán choques de horarios</param>
+        /// <returns>true si la solución presenta choques de horarios</returns>
+        private bool hayChoque(int individuo)
+        {
+            bool resultado = false;
+
+            return resultado;
+        }
+        /// <summary>
         /// Genera la población, es decir, llena la estructura this.soluciones
         /// con elementos producidos por this.generarSolucionAleatoria().
         /// Produce 21 soluciones o tantas como pueda, si el número de soluciones
@@ -231,12 +242,13 @@ namespace Evolucionae
         /// uno (de modo que se repitan más aquellos con mayor fitness)
         /// </item>
         /// <item>
-        /// Los elementos escogidos 
+        /// Los elementos escogidos se agrupan en
         /// </item>
         /// </list>
         /// </summary>
         public void evolucionar()
         {
+            
             for (int i = 0; i < this.soluciones.Count; ++i)
             {
                 this.fitness(this.soluciones[i]);
