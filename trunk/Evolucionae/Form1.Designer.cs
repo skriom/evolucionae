@@ -561,7 +561,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(280, 467);
+            this.btnSalir.Location = new System.Drawing.Point(313, 476);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(85, 36);
             this.btnSalir.TabIndex = 20;
@@ -577,7 +577,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 524);
+            this.ClientSize = new System.Drawing.Size(678, 524);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.tbCursos);
             this.Name = "Form1";
