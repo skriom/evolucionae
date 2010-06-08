@@ -162,7 +162,14 @@ namespace Evolucionae
             }
 			return resultado;
         }
-        private void corregirSolucion(int[] individuo)
+        /// <summary>
+        /// Corrige un individuo eliminando los choques en él
+        /// </summary>
+        /// <param name="individuo">Individuo a ser corregido. Luego del llamado a este
+        /// método, no pueden haber choques en los cursos que lo componen
+        /// </param>
+        /// <returns>individuo corregido</returns>
+        private int[] corregirSolucion(int[] individuo)
         {
             Curso cursoActual;
             for(int i = 0; i < individuo.Length; ++i)
@@ -176,6 +183,7 @@ namespace Evolucionae
                     }
                 }
             }
+            return individuo;
         }
 
         /// <summary>
@@ -228,49 +236,103 @@ namespace Evolucionae
         /// </summary>
         public void evolucionar()
         {
-            double[] fitness = new double[this.soluciones.Count];
+            double[] fitness;
             double sumatoriaFitness = 0;
             double fitnessTemp;
-            double[] vectorProbabilidades = new double[this.soluciones.Count];
+            double[] vectorProbabilidades;
             List<int[]> nuevaPoblacion = new List<int[]>();
             double dardo;
-            for (int i = 0; i < this.soluciones.Count; ++i)
-            { 
-                fitnessTemp = this.fitness(this.soluciones[i]);
-                fitness[i] = fitnessTemp;
-                sumatoriaFitness += fitnessTemp;
-                vectorProbabilidades[i] = 0;
-            }
-            //llenar vector de probabilidades
-            for (int i = 0; i < this.soluciones.Count; ++i)
+            for (int generaciones = 0; generaciones < 25; ++generaciones)
             {
-                vectorProbabilidades[i] = fitness[i]/sumatoriaFitness;
-                for (int jSumatoria = 0; jSumatoria < i; ++jSumatoria)
+                fitness = new double[this.soluciones.Count];
+                vectorProbabilidades = new double[this.soluciones.Count];
+                for (int i = 0; i < this.soluciones.Count; ++i)
                 {
-                    vectorProbabilidades[i] += vectorProbabilidades[jSumatoria];
+                    fitnessTemp = this.fitness(this.soluciones[i]);
+                    fitness[i] = fitnessTemp;
+                    sumatoriaFitness += fitnessTemp;
+                    vectorProbabilidades[i] = 0;
                 }
-            }
-            //se tiran soluciones.Count/2 dardos. Se verifica a qué tajada del pastel
-            //corresponde y se inserta el individuo (padre) asociado en nuevaPoblacion
-            for (int elegido = 0; elegido < this.soluciones.Count / 2; ++elegido)
-            {
-                dardo = this.generadorDeAleatorios.NextDouble();
-                //ubicar el dardo
-                for (int i = 1; i < vectorProbabilidades.Length; ++i)
+                //llenar vector de probabilidades
+                for (int i = 0; i < this.soluciones.Count; ++i)
                 {
-                    if (vectorProbabilidades[i] > dardo)
+                    vectorProbabilidades[i] = fitness[i] / sumatoriaFitness;
+                    for (int jSumatoria = 0; jSumatoria < i; ++jSumatoria)
                     {
-                        nuevaPoblacion.Add(this.soluciones[i - 1]);
-                        break;
+                        vectorProbabilidades[i] += vectorProbabilidades[jSumatoria];
                     }
                 }
+                //se tiran soluciones.Count/2 dardos. Se verifica a qué tajada del pastel
+                //corresponde y se inserta el individuo (padre) asociado en nuevaPoblacion
+                for (int elegido = 0; elegido < this.soluciones.Count / 2; ++elegido)
+                {
+                    dardo = this.generadorDeAleatorios.NextDouble();
+                    //ubicar el dardo
+                    for (int i = 1; i < vectorProbabilidades.Length; ++i)
+                    {
+                        if (vectorProbabilidades[i] > dardo)
+                        {
+                            nuevaPoblacion.Add(this.soluciones[i - 1]);
+                            break;
+                        }
+                    }
+                }
+                //ahora cruzamos a cada individuo de nuevaPoblacion con su siguiente, produciendo
+                //dos hijos (uno con la primera parte del padre y la segunda de la madre; el otro
+                //al revés). Los metemos ahí mismo, con cuidado de no cruzar hijos recién nacidos
+                //Antes de insertarlo, lo corregimos (quitamos choques). Listos para el incesto!!
+                int posicionDelUltimoPadre = nuevaPoblacion.Count;
+                for (int i = 0; i < posicionDelUltimoPadre; ++i)
+                {
+                    nuevaPoblacion.Add(this.corregirSolucion(this.cruzar(nuevaPoblacion[i], nuevaPoblacion[i + 1], true)));
+                    nuevaPoblacion.Add(this.corregirSolucion(this.cruzar(nuevaPoblacion[i], nuevaPoblacion[i + 1], false)));
+                }
+                //ahora tenemos una nueva poblacion
+                this.soluciones = nuevaPoblacion; // :)
             }
-            //ahora cruzamos a cada individuo de nuevaPoblacion con su siguiente
-            //y lo metemos ahí mismo
                 /*for (int i = 0; i < this.soluciones.Count; ++i)
                 {
                     this.fitness(this.soluciones[i]);
                 }*/
+        }
+        /// <summary>
+        /// Obtiene un nuevo individuo cuyos genes son parte del padre, parte de la madre
+        /// Se establece un punto i de corte. Si pImD es true, el nuevo individuo tiene todos
+        /// sus genes desde el 0 hasta el i-1 del padre y los demás de la madre. Al revés si
+        /// pImD es false
+        /// </summary>
+        /// <param name="padre">padre del nuevo individuo</param>
+        /// <param name="madre">madre del nuevo individuo</param>
+        /// <param name="pImD">si es true, los genes antes del corte los aporta el padre
+        /// y los demás la madre. Al revés si es false</param>
+        /// <returns></returns>
+        private int[] cruzar(int[] padre, int[] madre, bool pImD)
+        {
+            int[] resultado = new int[padre.Length];
+            int corte = this.generadorDeAleatorios.Next(padre.Length);
+            if (pImD)
+            {
+                for (int i = 0; i < corte; ++i)
+                {
+                    resultado[i] = padre[i];
+                }
+                for (int i = corte; i < madre.Length; ++i)
+                {
+                    resultado[i] = madre[i];
+                }
+            }
+            else
+            {
+                for (int i = 0; i < corte; ++i)
+                {
+                    resultado[i] = madre[i];
+                }
+                for (int i = corte; i < padre.Length; ++i)
+                {
+                    resultado[i] = padre[i];
+                }
+            }
+            return resultado;
         }
         /// <summary>
         /// Califica a un individuo de acuerdo a qué tan apto es.
