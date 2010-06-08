@@ -198,6 +198,22 @@ namespace Evolucionae
             }
 			return resultado;
         }
+        private void corregirSolucion(int[] individuo)
+        {
+            Curso cursoActual;
+            for(int i = 0; i < individuo.Length; ++i)
+            {
+                if (individuo[i] != -1)
+                {
+                    cursoActual = this.cursosTipo[this.persona.cursosQueNecesita.ElementAt(i)][individuo[i]];
+                    if (this.chocaCurso(cursoActual, individuo, i))
+                    {
+                        individuo[i] = -1;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Indica si una solución presenta choques de horarios
         /// </summary>
@@ -248,11 +264,49 @@ namespace Evolucionae
         /// </summary>
         public void evolucionar()
         {
-            
+            double[] fitness = new double[this.soluciones.Count];
+            double sumatoriaFitness = 0;
+            double fitnessTemp;
+            double[] vectorProbabilidades = new double[this.soluciones.Count];
+            List<int[]> nuevaPoblacion = new List<int[]>();
+            double dardo;
+            for (int i = 0; i < this.soluciones.Count; ++i)
+            { 
+                fitnessTemp = this.fitness(this.soluciones[i]);
+                fitness[i] = fitnessTemp;
+                sumatoriaFitness += fitnessTemp;
+                vectorProbabilidades[i] = 0;
+            }
+            //llenar vector de probabilidades
             for (int i = 0; i < this.soluciones.Count; ++i)
             {
-                this.fitness(this.soluciones[i]);
+                vectorProbabilidades[i] = fitness[i]/sumatoriaFitness;
+                for (int jSumatoria = 0; jSumatoria < i; ++jSumatoria)
+                {
+                    vectorProbabilidades[i] += vectorProbabilidades[jSumatoria];
+                }
             }
+            //se tiran soluciones.Count/2 dardos. Se verifica a qué tajada del pastel
+            //corresponde y se inserta el individuo (padre) asociado en nuevaPoblacion
+            for (int elegido = 0; elegido < this.soluciones.Count / 2; ++elegido)
+            {
+                dardo = this.generadorDeAleatorios.NextDouble();
+                //ubicar el dardo
+                for (int i = 1; i < vectorProbabilidades.Length; ++i)
+                {
+                    if (vectorProbabilidades[i] > dardo)
+                    {
+                        nuevaPoblacion.Add(this.soluciones[i - 1]);
+                        break;
+                    }
+                }
+            }
+            //ahora cruzamos a cada individuo de nuevaPoblacion con su siguiente
+            //y lo metemos ahí mismo
+                /*for (int i = 0; i < this.soluciones.Count; ++i)
+                {
+                    this.fitness(this.soluciones[i]);
+                }*/
         }
         /// <summary>
         /// Califica a un individuo de acuerdo a qué tan apto es.
