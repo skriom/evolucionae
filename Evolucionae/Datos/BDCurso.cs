@@ -54,7 +54,6 @@ namespace Evolucionae
     {
         List<Curso> listaC = new List<Curso>();
         Curso c;
-        String nombreC;
         DataTable dt = solicitaListaCursos();
         Array lista;
         for (int i = 0; i < dt.Rows.Count; i++)
