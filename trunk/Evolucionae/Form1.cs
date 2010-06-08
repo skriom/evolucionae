@@ -15,6 +15,7 @@ namespace Evolucionae
         List<String> cursosP = new List<String>();
         List<Curso> cursos = new List<Curso>();
         List<Persona> personas = new List<Persona>();
+        Dictionary<string, List<Curso>> cursosTipo = new Dictionary<string, List<Curso>>();
         //Persona p = new Persona();
         //Curso c = new Curso();
         //int contador;
@@ -41,8 +42,7 @@ namespace Evolucionae
             cargarComboCursos();
             cargarPersonas();
             cargarComboPersonas();
-
-            //imprimirListaPersonas();
+            this.initCursosTipo();
             this.pruebaTonta();
             this.inicializarGridHorario();
         }
@@ -73,7 +73,7 @@ namespace Evolucionae
             person.cursosQueNecesita.Add("io");
             person.cursosQueNecesita.Add("mineria");
             bdp.insertarPersona(person);
-            AG1 ag1 = new AG1(person, this.cursos);
+            AG1 ag1 = new AG1(person, cursosTipo);
             ag1.generarPoblacionInicial();
             ag1.evolucionar();
         }
@@ -445,6 +445,43 @@ namespace Evolucionae
             }
         }
 
+        /// <summary>
+        /// Construye la estructura cursosTipo.
+        /// <example>
+        /// La estructura debería tener una forma como la siguiente:
+        /// +-----+   +--------+--------+   +-----------+
+        /// |tipo1|-->|opcion10|opcion11|...|opcion1N1-1|
+        /// +-----+   +--------+--------+   +-----------+
+        /// |tipo2|-->|opcion20|opcion21|...|opcion2N2-1|
+        /// +-----+   +--------+--------+...+-----------+
+        /// .           .                        .
+        /// .           .                ...     .
+        /// .           .                        .
+        /// +-----+   +--------+--------+   +-----------+
+        /// |tipon|-->|opcionn0|opcionn1|...|opcionnNn-1|
+        /// +-----+   +--------+--------+   +-----------+
+        /// Aquí, tipo1 podría ser "paradigmas", y opción11 podría ser (martes, 11 am), claro,
+        /// recordando que los objetos en la lista asociada a cada tipo, son objetos
+        /// <code>Curso</code>
+        /// </example>
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Si la lista de cursos es
+        /// <code>null</code></exception>
+        private void initCursosTipo()
+        {
+            if (this.cursos == null)
+            {
+                throw new InvalidOperationException("La lista de cursos es nula");
+            }
+            foreach (Curso c in this.cursos)
+            {
+                if (!this.cursosTipo.ContainsKey(c.nombre)) //si no hay una entrada para ese
+                {//curso, créela
+                    this.cursosTipo.Add(c.nombre, new List<Curso>());
+                }
+                this.cursosTipo[c.nombre].Add(c);//añada el curso
+            }
+        }
       
         
 

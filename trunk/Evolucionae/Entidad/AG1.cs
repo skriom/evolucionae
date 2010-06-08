@@ -14,7 +14,7 @@ namespace Evolucionae
     class AG1
     {
         private int cursosPorDia;
-        private List<Curso> cursos;
+        //private List<Curso> cursos;
         private Persona persona;
         private List<int[]> soluciones;
         private Random generadorDeAleatorios;
@@ -60,15 +60,14 @@ namespace Evolucionae
         /// <param name="persona">persona para la que se buscarán soluciones</param>
         /// <param name="cursos">lista de cursos disponibles para satisfacer
         /// la necesidad de información de <paramref name="persona"/></param>
-        public AG1(Persona persona, List<Curso> cursos)
+        public AG1(Persona persona, Dictionary<string, List<Curso>> cursosT)
         {
             this.generadorDeAleatorios = new Random(DateTime.Now.Millisecond);
             this.persona = persona;
-            this.cursos = cursos;
+            //this.cursos = cursos;
             this.numCursosNecesita = this.persona.cursosQueNecesita.Count;
-            this.cursosTipo = new Dictionary<string, List<Curso>>();
+            this.cursosTipo = cursosT;
             this.soluciones = new List<int[]>();
-            this.initCursosTipo();
             this.setMaxNumeroSoluciones();
         }
         /// <summary>
@@ -84,43 +83,8 @@ namespace Evolucionae
             }
             this.MAX_SOLUCIONES = resultado;
         }
-        /// <summary>
-        /// Construye la estructura cursosTipo.
-        /// <example>
-        /// La estructura debería tener una forma como la siguiente:
-        /// +-----+   +--------+--------+   +-----------+
-        /// |tipo1|-->|opcion10|opcion11|...|opcion1N1-1|
-        /// +-----+   +--------+--------+   +-----------+
-        /// |tipo2|-->|opcion20|opcion21|...|opcion2N2-1|
-        /// +-----+   +--------+--------+...+-----------+
-        /// .           .                        .
-        /// .           .                ...     .
-        /// .           .                        .
-        /// +-----+   +--------+--------+   +-----------+
-        /// |tipon|-->|opcionn0|opcionn1|...|opcionnNn-1|
-        /// +-----+   +--------+--------+   +-----------+
-        /// Aquí, tipo1 podría ser "paradigmas", y opción11 podría ser (martes, 11 am), claro,
-        /// recordando que los objetos en la lista asociada a cada tipo, son objetos
-        /// <code>Curso</code>
-        /// </example>
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Si la lista de cursos es
-        /// <code>null</code></exception>
-        private void initCursosTipo()
-        {
-            if (this.cursos == null)
-            {
-                throw new InvalidOperationException("La lista de cursos es nula");
-            }
-            foreach (Curso c in this.cursos)
-            {
-                if (!this.cursosTipo.ContainsKey(c.nombre)) //si no hay una entrada para ese
-                {//curso, créela
-                    this.cursosTipo.Add(c.nombre, new List<Curso>());
-                }
-                this.cursosTipo[c.nombre].Add(c);//añada el curso
-            }
-        }
+       
+       
         /// <summary>
         /// <para>Genera una solución cualquiera para la persona, o, si no es posible
         /// con la piscina actual de cursos, se genera lo más cercano a una
