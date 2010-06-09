@@ -68,7 +68,7 @@ namespace Evolucionae
             this.cursos.Add(cur);
             idActual = 0;
             Persona person = new Persona(idActual++, "Fabian");
-            //person.cursosQueNecesita.Add("paradigmas");
+            person.cursosQueNecesita.Add("paradigmas");
             person.cursosQueNecesita.Add("bases");
             person.cursosQueNecesita.Add("io");
             person.cursosQueNecesita.Add("mineria");
