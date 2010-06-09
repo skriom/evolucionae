@@ -253,9 +253,9 @@ namespace Evolucionae
                     //ubicar el dardo
                     for (int elegido = 0; elegido < vectorProbabilidades.Length; ++elegido)
                     {
-                        if (vectorProbabilidades[elegido] >= dardo)
+                        if (vectorProbabilidades[elegido] >= dardo)//si encontramos la tajada
                         {
-                            nuevaPoblacion.Add(this.soluciones[elegido]);
+                            nuevaPoblacion.Add(this.soluciones[elegido]);//metemos al padre, felicidades!
                             break;
                         }
                     }
@@ -263,7 +263,7 @@ namespace Evolucionae
                 //ahora cruzamos a cada individuo de nuevaPoblacion con su siguiente, produciendo
                 //dos hijos (uno con la primera parte del padre y la segunda de la madre; el otro
                 //al revés). Los metemos ahí mismo, con cuidado de no cruzar hijos recién nacidos
-                //Antes de insertarlo, lo corregimos (quitamos choques). Listos para el incesto!!
+                //Antes de insertarlo, lo mutamos y lo corregimos (quitamos choques). Listos para el incesto!!
                 corte = this.generadorDeAleatorios.Next(this.persona.cursosQueNecesita.Count);
                 int posicionDelUltimoPadre = nuevaPoblacion.Count;
                 for (int i = 0; i < posicionDelUltimoPadre; i+=2)
@@ -274,19 +274,16 @@ namespace Evolucionae
                 //ahora tenemos una nueva poblacion
                 this.soluciones = nuevaPoblacion.Clone(); // :)
                 nuevaPoblacion.Clear();
-                //si es la última generación, calcularles el fitness de una vez, porque de otra forma no se les
-                //calificará. Y lo ocupamos para ordenar
-                if (generaciones >= 50 || desvStd <= 5)
-                {
-                    fitness = new double[this.soluciones.Count];
-                    for (int i = 0; i < this.soluciones.Count; ++i)
-                    {
-                        fitness[i] = this.fitness(this.soluciones[i]);
-                    }
-                }
+            }
+            //ahora eliminamos soluciones repetidas y las ordenamos de mejor a peor
+            this.eliminarRepetidos(this.soluciones);
+            //para ordenar, hay que calcular el fitness
+            fitness = new double[this.soluciones.Count];
+            for (int i = 0; i < this.soluciones.Count; ++i)
+            {
+                fitness[i] = this.fitness(this.soluciones[i]);
             }
             this.ordenar(this.soluciones, fitness);
-            this.eliminarRepetidos(this.soluciones);
             //this.soluciones.Sort(delegate(int[] sol1, int[] sol2) { return fitness[this.soluciones.IndexOf(sol1)].CompareTo(fitness[this.soluciones.IndexOf(sol2)]);});//p1.name.CompareTo(p2.name); });
         }
         /// <summary>
@@ -494,21 +491,49 @@ namespace Evolucionae
             }
         }
         /// <summary>
-        /// Elimina los elementos repetidos de una lista de arreglos de enteros.
-        /// Requiere que todos los elementos iguales estén contigüos.
+        /// Elimina los elementos repetidos de una lista de arreglos de enteros no vacía.
         /// Dos arreglos de enteros se definen como iguales si contienen los mismos valores en
         /// el mismo orden
         /// </summary>
         /// <param name="lista">Lista a la que se le eliminarán los elementos repetidos</param>
         private void eliminarRepetidos(List<int[]> lista)
         {
+            //al final del for, almacen contendrá un elemento de cada tipo de lista
+            List<int[]> almacen = new List<int[]>();
+            almacen.Add(lista.ElementAt(0));
             for(int i = 1; i < lista.Count; ++i)
             {
-                while(this.arreglosSonIguales(lista[i], lista[i - 1]))
+                if (!this.pertenece(almacen, lista[i]))
                 {
-                    lista.RemoveAt(i);
+                    almacen.Add(lista[i]);
                 }
             }
+            //lista = almacen.Clone();
+            lista.Clear();
+            lista.AddRange(almacen);
+        }
+        /// <summary>
+        /// Revisa si un arreglo de enteros pertenece a una lista de arreglos
+        /// de enteros. Esto es cierto cuando la lista contiene al menos un
+        /// arreglo de enteros i tal que this.arreglosSonIguales(i, elemento) es true.
+        /// </summary>
+        /// <param name="lista">Lista de arreglos de enteros donde se revisará
+        /// si <paramref name="elemento"/>elemento pertenece</param>
+        /// <param name="elemento">elemento por el que se pregunta si
+        /// pertenece a la <paramref name="lista"/>lista</param>
+        /// <returns></returns>
+        private bool pertenece(List<int[]> lista, int[] elemento)
+        {
+            bool resultado = false;
+            foreach (int[] i in lista)
+            {
+                if (this.arreglosSonIguales(i, elemento))
+                {
+                    resultado = true;
+                    break;
+                }
+            }
+            return resultado;
         }
         /// <summary>
         /// Verifica si dos arreglos de enteros del mismo tamaño son iguales
