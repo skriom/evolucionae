@@ -67,6 +67,18 @@ namespace Evolucionae
             this.personas = personas;
             this.distribucion = new List<Dictionary<Curso, int>>();
             this.solucionesIndependientes = soluciones;
+            this.initNumCursos();
+        }
+        /// <summary>
+        /// Calcula el número de cursos disponibles y lo almacena en this.numCursos
+        /// </summary>
+        private void initNumCursos()
+        {
+            this.numCursos = 0;
+            foreach (string tipoCurso in this.cursosTipo.Keys)
+            {
+                this.numCursos += this.cursosTipo[tipoCurso].Count;
+            }
         }
         /// <summary>
         /// Califica una solución asignándole un valor en [0, 100] siguiendo
@@ -88,19 +100,35 @@ namespace Evolucionae
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="?">individuo a evaluar su fitness</param>
+        /// <param name="?">índice en this.soluciones del individuo a evaluar su fitness</param>
         /// <returns>
         /// un valor real en [0, 100] que representa la aptitud de 
         /// <paramref name="individuo"/>individuo
         /// </returns>
-        private double fitness(int[] individuo)
+        private double fitness(int individuo)
         {
             double resultado = 0;
-            //primero calificamos si rebasa el cupo de los cursos. Este rubro vale 40%
+            //primero calificamos si rebasa el cupo de los cursos. Este rubro vale 50%
             //¿Cuál es el peor caso de personas asignadas a un curso a? Pues que rebase el cupo máximo de a
             //en this.personas.Count - a.cupo (o sea, que rebase en lo máximo que se puede rebasar!)
             //Entonces el peor de los casos de este rubro es que ocurra esa violación para todos los cursos!
-            //De modo que vale 40/numCursos el no violar este rubro
+            //De modo que vale 50/numCursosUsados el no violar este rubro para cada curso.
+            int numCursosUsados = this.distribucion[individuo].Count; //num mapeos Curso -> num_personas para individuo
+            foreach(Curso c in this.distribucion[individuo].Keys)
+            {
+                if(c.cupo >= this.distribucion[individuo][c])
+                {
+                    resultado += 50 / numCursosUsados;
+                }
+            }
+            //ahora calificamos si califica la necesidad de todas las personas. Este rubro vale 40%
+            //en el peor caso, no le asigna ningún curso a nadie. Entonces, la satisfacción de cada persona
+            //vale 40/this.personas.Count. Para cada curso j de una persona, su satisfacción vale
+            //40/(this.personas.Count*numOpcionesCurso(j))
+            for (int p = 0; p < this.personas.Count; ++p)
+            { 
+                //for(int c = 0; c < this.solucionesIndependientes[p][soluciones[individuo]])
+            }
             return resultado;
         }
         /**
