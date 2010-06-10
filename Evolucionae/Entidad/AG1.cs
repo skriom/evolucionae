@@ -6,15 +6,18 @@ using System.Text;
 namespace Evolucionae
 {
     /// <summary>
-    /// La clase AG1 se comporta como un algoritmo genético que genera y optimiza
-    /// horarios para una persona. Un objeto <c>AG1</c> está asociado a una persona
-    /// (que tiene una necesidad de cursos) y una lista de cursos suficiente para satisfacer
+    /// La clase AG1 usa un algoritmo genético que genera y optimiza
+    /// horarios para una persona, dado un conjunto de cursos disponibles.
+    /// Un objeto <c>AG1</c> está asociado a una persona (que tiene una
+    /// necesidad de cursos) y una lista de cursos suficiente para satisfacer
     /// la necesidad de la persona.
     /// </summary>
+    /// <remarks>
+    /// Después de invocar al método evolucionar(), la lista de soluciones
+    /// del objeto AG1 tiene soluciones no repetidas ordenadas de mejor a peor
+    /// </remarks>
     class AG1
     {
-        private int cursosPorDia;
-        //private List<Curso> cursos;
         private Persona persona;
         private List<int[]> soluciones;
         private Random generadorDeAleatorios;
@@ -88,7 +91,7 @@ namespace Evolucionae
         /// <remarks>Nótese que si la piscina de cursos sólo contiene k
         /// cursos de tipo i, entonces la i-ésima entrada del arreglo devuelto
         /// no puede tener un valor mayor que k-1</remarks>
-        public int[] generarSolucionAleatoria()
+        private int[] generarSolucionAleatoria()
         {
             int random = 0;
             int[] solucion = new int[this.numCursosNecesita];
@@ -204,7 +207,7 @@ namespace Evolucionae
             //temporal que tiene el fitness del individuo actual en un ciclo
             //se usa solo para optimizar, para no calcular el fitness más de una vez
             double fitnessTemp;
-            //arraglo con los cortes en [0,1] usandos para seleccionar a cada individuo
+            //arreglo con los cortes en [0,1] usandos para seleccionar a cada individuo
             double[] vectorProbabilidades;
             //a partir de donde se toman genes del padre y a partir de donde se
             //toman de la madre en el cruce
