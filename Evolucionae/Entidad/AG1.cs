@@ -179,7 +179,7 @@ namespace Evolucionae
         /// <summary>
         /// Modifica la lista de soluciones, insertando en ella elementos cada vez mejores
         /// según la función de fitness, todo esto siguiendo un modelo de algoritmo genético.
-        /// Se efectúan 30 iteraciones, en cada una de las cuales se hace lo siguiente:
+        /// Se efectúan 50 iteraciones (o hasta converger), en cada una de las cuales se hace lo siguiente:
         /// <list type="bullet">
         /// <item>
         /// Se calcula el fitness de cada elemento de la población actual
@@ -320,15 +320,17 @@ namespace Evolucionae
         }
         /// <summary>
         /// Obtiene un nuevo individuo cuyos genes son parte del padre, parte de la madre
-        /// Se establece un punto i de corte. Si pImD es true, el nuevo individuo tiene todos
+        /// Si pImD es true, el nuevo individuo tiene todos
         /// sus genes desde el 0 hasta el i-1 del padre y los demás de la madre. Al revés si
         /// pImD es false
         /// </summary>
         /// <param name="padre">padre del nuevo individuo</param>
         /// <param name="madre">madre del nuevo individuo</param>
+        /// <param name="corte">punto de corte. Los genes anteriores a este punto son del padre.
+        /// Los demás, son de la madre</param>
         /// <param name="pImD">si es true, los genes antes del corte los aporta el padre
         /// y los demás la madre. Al revés si es false</param>
-        /// <returns></returns>
+        /// <returns>Un nuevo individuo con genes parte del padre, parte de la madre</returns>
         private int[] cruzar(int[] padre, int[] madre, int corte, bool pImD)
         {
             int[] resultado = new int[padre.Length];

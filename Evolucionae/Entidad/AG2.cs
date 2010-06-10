@@ -81,6 +81,130 @@ namespace Evolucionae
             }
         }
         /// <summary>
+        /// Produce 21 soluciones aleatoriamente (junto con su distribución de cursos asociada, en
+        /// this.distribuciones) y las guarda en this.soluciones
+        /// </summary>
+        private void generarPoblacionInicial()
+        {
+            for (int i = 0; i < 21; i++)
+            {
+                this.generarSolucionAleatoria();
+            }
+        }
+        /// <summary>
+        /// Modifica la lista de soluciones, insertando en ella elementos cada vez mejores
+        /// según la función de fitness, todo esto siguiendo un modelo de algoritmo genético.
+        /// Se efectúan 30 iteraciones (o hasta converger), en cada una de las cuales se hace lo siguiente:
+        /// <list type="bullet">
+        /// <item>
+        /// Se calcula el fitness de cada elemento de la población actual
+        /// </item>
+        /// <item>
+        /// Se asocia una probabilidad a cada elemento de la población actual, proporcional a
+        /// su fitness
+        /// </item>
+        /// <item>
+        /// Se escogen aleatoriamente (sin reemplazo, de modo que puedan salir repetidos, esa
+        /// es la idea) this.soluciones.Count/2 elementos, según la probabilidad asociada de cada
+        /// uno (de modo que se repitan más aquellos con mayor fitness)
+        /// </item>
+        /// <item>
+        /// Los elementos escogidos se agrupan en
+        /// </item>
+        /// </list>
+        /// </summary>
+        public void evolucionar()
+        {
+            //fitness[i] = aptitud de la i-ésima solución
+            double[] fitness = new double[1];
+            //suma de todas las aptitudes. Se usa para calcular la proba de ser electo
+            double sumatoriaFitness = 0;
+            //temporal que tiene el fitness del individuo actual en un ciclo
+            //se usa solo para optimizar, para no calcular el fitness más de una vez
+            double fitnessTemp;
+            //arreglo con los cortes en [0,1] usandos para seleccionar a cada individuo
+            double[] vectorProbabilidades;
+            //a partir de donde se toman genes del padre y a partir de donde se
+            //toman de la madre en el cruce
+            int corte;
+            //siguiente generación. Al final del ciclo grande this.soluciones
+            //se convierte en nuevaPoblacion
+            List<int[]> nuevaPoblacion = new List<int[]>();
+            //aleatorio que determina cuál elemento tomar en la selección...
+            //es como el dardo que se lanza a la ruleta
+            double dardo;
+            //media del fitness de la población. Se usa solo para calcular desvStd
+            double media = 0;
+            //desviación estándar de los fitness. Conforme tiende a 0, el 
+            //algoritmo genético converge
+            double desvStd = double.MaxValue; //algún valor bien grande
+            //repetimos 30 veces o hasta que el cambio (medido con desvStd) sea menor que un cierto umbral
+            for (int generaciones = 0; generaciones < 50 && desvStd > 5; ++generaciones)
+            {
+                fitness = new double[this.soluciones.Count];
+                vectorProbabilidades = new double[this.soluciones.Count];
+                media = desvStd = 0;
+                for (int i = 0; i < this.soluciones.Count; ++i)
+                {
+                    fitnessTemp = this.fitness(i);
+                    fitness[i] = fitnessTemp;
+                    sumatoriaFitness += fitnessTemp;
+                    vectorProbabilidades[i] = 0;
+                }
+                media = sumatoriaFitness / this.soluciones.Count;
+                //llenar vector de probabilidades
+                //de paso aprovechamos para calcular desvStd
+                vectorProbabilidades[0] = fitness[0] / sumatoriaFitness;
+                for (int i = 1; i < this.soluciones.Count; ++i)
+                {
+                    vectorProbabilidades[i] = fitness[i] / sumatoriaFitness + vectorProbabilidades[i - 1];
+                    desvStd += Math.Pow(fitness[i] - media, 2);
+                }
+                desvStd /= this.soluciones.Count;
+                desvStd = Math.Sqrt(desvStd);
+                sumatoriaFitness = 0;
+                //se tiran soluciones.Count/2 dardos. Se verifica a qué tajada del pastel
+                //corresponde y se inserta el individuo (padre) asociado en nuevaPoblacion
+                for (int i = 0; i < Math.Ceiling(this.soluciones.Count / 2.0); ++i)
+                {
+                    dardo = this.generadorDeAleatorios.NextDouble();
+                    //ubicar el dardo
+                    for (int elegido = 0; elegido < vectorProbabilidades.Length; ++elegido)
+                    {
+                        if (vectorProbabilidades[elegido] >= dardo)//si encontramos la tajada
+                        {
+                            nuevaPoblacion.Add(this.soluciones[elegido]);//metemos al padre, felicidades!
+                            break;
+                        }
+                    }
+                }
+                //ahora cruzamos a cada individuo de nuevaPoblacion con su siguiente, produciendo
+                //dos hijos (uno con la primera parte del padre y la segunda de la madre; el otro
+                //al revés). Los metemos ahí mismo, con cuidado de no cruzar hijos recién nacidos
+                //Antes de insertarlo, lo mutamos y lo corregimos (quitamos choques). Listos para el incesto!!
+                corte = this.generadorDeAleatorios.Next(this.persona.cursosQueNecesita.Count);
+                int posicionDelUltimoPadre = nuevaPoblacion.Count;
+                for (int i = 0; i < posicionDelUltimoPadre; i += 2)
+                {
+                    nuevaPoblacion.Add(this.corregirSolucion(this.mutar(this.cruzar(nuevaPoblacion[i], nuevaPoblacion[i + 1], corte, true))));
+                    nuevaPoblacion.Add(this.corregirSolucion(this.mutar(this.cruzar(nuevaPoblacion[i], nuevaPoblacion[i + 1], corte, false))));
+                }
+                //ahora tenemos una nueva poblacion
+                this.soluciones = nuevaPoblacion.Clone(); // :)
+                nuevaPoblacion.Clear();
+            }
+            //ahora eliminamos soluciones repetidas y las ordenamos de mejor a peor
+            this.eliminarRepetidos(this.soluciones);
+            //para ordenar, hay que calcular el fitness
+            fitness = new double[this.soluciones.Count];
+            for (int i = 0; i < this.soluciones.Count; ++i)
+            {
+                fitness[i] = this.fitness(this.soluciones[i]);
+            }
+            this.ordenar(this.soluciones, fitness);
+            //this.soluciones.Sort(delegate(int[] sol1, int[] sol2) { return fitness[this.soluciones.IndexOf(sol1)].CompareTo(fitness[this.soluciones.IndexOf(sol2)]);});//p1.name.CompareTo(p2.name); });
+        }
+        /// <summary>
         /// Califica una solución asignándole un valor en [0, 100] siguiendo
         /// las siguientes reglas:
         /// <list type="bullet">
@@ -125,19 +249,43 @@ namespace Evolucionae
             //en el peor caso, no le asigna ningún curso a nadie. Entonces, la satisfacción de cada persona
             //vale 40/this.personas.Count. Para cada curso j de una persona, su satisfacción vale
             //40/(this.personas.Count*numOpcionesCurso(j))
+            Curso cursoAlQueSeRefiere;
             for (int p = 0; p < this.personas.Count; ++p)
-            { 
-                //for(int c = 0; c < this.solucionesIndependientes[p][soluciones[individuo]])
+            {
+                for (int c = 0; c < this.solucionesIndependientes[p][soluciones[individuo][p]].Length; ++c)
+                {
+                    cursoAlQueSeRefiere = this.cursosTipo[this.personas[p].cursosQueNecesita[c]][solucionesIndependientes[p][soluciones[individuo][p]][c]];
+                    if(this.solucionesIndependientes[p][soluciones[individuo][p]][c] != -1)
+                    {
+                        resultado += 40.0 / (this.personas.Count * this.cursosTipo[cursoAlQueSeRefiere.nombre].Count);
+                    }
+                }
             }
+            //ahora calificamos que no dejen cursos vacíos. Este rubro vale 10%
+            //En el peor caso, todos los cursos quedan vacíos. Entonces, para cada curso, el no estar vacío
+            //aporta 10/numCursosUsados puntos
+            resultado += this.numCursos * 10.0 / numCursosUsados;
             return resultado;
         }
-        /**
-         * Indica cuántos cursos fueron asignados
-         */
-        private int numCursosAsignados(int[] solucionIndependiente)
+        /// <summary>
+        /// Obtiene un nuevo individuo cuyos genes son parte del padre, parte de la madre
+        /// </summary>
+        /// <param name="padre">padre del nuevo individuo</param>
+        /// <param name="madre">madre del nuevo individuo</param>
+        /// <param name="corte">punto de corte. Los genes anteriores a este punto son del padre.
+        /// Los demás, son de la madre</param>
+        /// <returns>Un nuevo individuo con genes parte del padre, parte de la madre</returns>
+        private int[] cruzar(int[] padre, int[] madre, int corte)
         {
-            int resultado = 0;
-
+            int[] resultado = new int[padre.Length];
+            for (int i = 0; i < corte; ++i)
+            {
+                resultado[i] = padre[i];
+            }
+            for (int i = corte; i < madre.Length; ++i)
+            {
+                resultado[i] = madre[i];
+            }
             return resultado;
         }
         /// <summary>
