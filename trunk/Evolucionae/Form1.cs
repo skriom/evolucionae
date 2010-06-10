@@ -482,7 +482,13 @@ namespace Evolucionae
                 this.cursosTipo[c.nombre].Add(c);//añada el curso
             }
         }
-      
+        /// <summary>
+        /// Genera una lista de soluciones para cada
+        /// </summary>
+        private void generarSolucionIndependientes()
+        { 
+        
+        }
         
 
         
