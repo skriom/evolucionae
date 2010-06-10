@@ -15,6 +15,24 @@ namespace Evolucionae
         List<String> cursosP = new List<String>();
         List<Curso> cursos = new List<Curso>();
         List<Persona> personas = new List<Persona>();
+        /// <summary>
+        /// Diccionario que mapea cada tipo de curso (e.g. "inglés", "matemáticas")
+        /// a la lista de cursos de ese tipo disponibles.
+        /// <example>
+        /// Si se tiene la siguiente lista de cursos:
+        /// ("mate",lunes,13),("mate",lunes,11),("ciencias",martes,10)
+        /// una vez construida la estructura cursosTipo, la siguiente línea de código
+        /// <code>
+        /// cursosTipo["mate"]
+        /// </code>
+        /// debe devolver la lista:
+        /// ("mate",lunes,13),("mate",lunes,11)
+        /// </example>
+        /// </summary>
+        /// <remarks>Esta estructura se construye una vez se sepa la lista de
+        /// cursos disponibles. Dar la base para construir esta estructura es el único 
+        /// propósito de la lista de cursos.
+        /// </remarks>
         Dictionary<string, List<Curso>> cursosTipo = new Dictionary<string, List<Curso>>();
         //Persona p = new Persona();
         //Curso c = new Curso();
