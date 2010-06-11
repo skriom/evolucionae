@@ -182,26 +182,32 @@ namespace Evolucionae
                 //dos hijos (uno con la primera parte del padre y la segunda de la madre; el otro
                 //al revés). Los metemos ahí mismo, con cuidado de no cruzar hijos recién nacidos
                 //Antes de insertarlo, lo mutamos y lo corregimos (quitamos choques). Listos para el incesto!!
-                corte = this.generadorDeAleatorios.Next(this.persona.cursosQueNecesita.Count);
+                corte = this.generadorDeAleatorios.Next(this.personas.Count);
                 int posicionDelUltimoPadre = nuevaPoblacion.Count;
                 for (int i = 0; i < posicionDelUltimoPadre; i += 2)
                 {
-                    nuevaPoblacion.Add(this.corregirSolucion(this.mutar(this.cruzar(nuevaPoblacion[i], nuevaPoblacion[i + 1], corte, true))));
-                    nuevaPoblacion.Add(this.corregirSolucion(this.mutar(this.cruzar(nuevaPoblacion[i], nuevaPoblacion[i + 1], corte, false))));
+                    nuevaPoblacion.Add(this.cruzar (nuevaPoblacion[i], nuevaPoblacion[i + 1], corte));
+                    nuevaPoblacion.Add(this.cruzar(nuevaPoblacion[i + 1], nuevaPoblacion[i], corte));
                 }
                 //ahora tenemos una nueva poblacion
                 this.soluciones = nuevaPoblacion.Clone(); // :)
                 nuevaPoblacion.Clear();
+                //calcular distribución de cursos para la nueva población
+                this.distribucion.Clear();
+                for (int e = 0; e < this.soluciones.Count; ++e)
+                {
+                    this.setDistribucion(this.soluciones[e]);
+                }
             }
             //ahora eliminamos soluciones repetidas y las ordenamos de mejor a peor
-            this.eliminarRepetidos(this.soluciones);
+            /*this.eliminarRepetidos(this.soluciones);
             //para ordenar, hay que calcular el fitness
             fitness = new double[this.soluciones.Count];
             for (int i = 0; i < this.soluciones.Count; ++i)
             {
                 fitness[i] = this.fitness(this.soluciones[i]);
             }
-            this.ordenar(this.soluciones, fitness);
+            this.ordenar(this.soluciones, fitness);*/
             //this.soluciones.Sort(delegate(int[] sol1, int[] sol2) { return fitness[this.soluciones.IndexOf(sol1)].CompareTo(fitness[this.soluciones.IndexOf(sol2)]);});//p1.name.CompareTo(p2.name); });
         }
         /// <summary>
