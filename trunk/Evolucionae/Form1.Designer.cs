@@ -50,6 +50,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbPersonas = new System.Windows.Forms.TabPage();
+            this.btnAG2 = new System.Windows.Forms.Button();
+            this.btnAG1 = new System.Windows.Forms.Button();
             this.ListaP = new System.Windows.Forms.ListBox();
             this.grpBxPersona = new System.Windows.Forms.GroupBox();
             this.gbCursosP = new System.Windows.Forms.GroupBox();
@@ -79,8 +81,6 @@
             this.obtenerListaCursos = new Evolucionae.Dataset.DataSetCursosTableAdapters.obtenerListaCursos();
             this.btnSalir = new System.Windows.Forms.Button();
             this.obtenerListaPersonas = new Evolucionae.Dataset.DataSetPersonaTableAdapters.obtenerListaPersonas();
-            this.btnAG1 = new System.Windows.Forms.Button();
-            this.btnAG2 = new System.Windows.Forms.Button();
             this.tbCursos.SuspendLayout();
             this.tbCursoss.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).BeginInit();
@@ -282,8 +282,7 @@
             "Martes",
             "Miercoles",
             "Jueves",
-            "Viernes",
-            "Sabado"});
+            "Viernes"});
             this.cmbDia.Location = new System.Drawing.Point(402, 19);
             this.cmbDia.Name = "cmbDia";
             this.cmbDia.Size = new System.Drawing.Size(121, 21);
@@ -322,6 +321,25 @@
             this.tbPersonas.TabIndex = 1;
             this.tbPersonas.Text = "Personas";
             this.tbPersonas.UseVisualStyleBackColor = true;
+            // 
+            // btnAG2
+            // 
+            this.btnAG2.Location = new System.Drawing.Point(478, 146);
+            this.btnAG2.Name = "btnAG2";
+            this.btnAG2.Size = new System.Drawing.Size(141, 55);
+            this.btnAG2.TabIndex = 30;
+            this.btnAG2.Text = "AG2";
+            this.btnAG2.UseVisualStyleBackColor = true;
+            // 
+            // btnAG1
+            // 
+            this.btnAG1.Location = new System.Drawing.Point(478, 45);
+            this.btnAG1.Name = "btnAG1";
+            this.btnAG1.Size = new System.Drawing.Size(141, 55);
+            this.btnAG1.TabIndex = 29;
+            this.btnAG1.Text = "AG1";
+            this.btnAG1.UseVisualStyleBackColor = true;
+            this.btnAG1.Click += new System.EventHandler(this.btnAG1_Click);
             // 
             // ListaP
             // 
@@ -576,24 +594,6 @@
             // obtenerListaPersonas
             // 
             this.obtenerListaPersonas.ClearBeforeFill = true;
-            // 
-            // btnAG1
-            // 
-            this.btnAG1.Location = new System.Drawing.Point(478, 45);
-            this.btnAG1.Name = "btnAG1";
-            this.btnAG1.Size = new System.Drawing.Size(141, 55);
-            this.btnAG1.TabIndex = 29;
-            this.btnAG1.Text = "AG1";
-            this.btnAG1.UseVisualStyleBackColor = true;
-            // 
-            // btnAG2
-            // 
-            this.btnAG2.Location = new System.Drawing.Point(478, 146);
-            this.btnAG2.Name = "btnAG2";
-            this.btnAG2.Size = new System.Drawing.Size(141, 55);
-            this.btnAG2.TabIndex = 30;
-            this.btnAG2.Text = "AG2";
-            this.btnAG2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

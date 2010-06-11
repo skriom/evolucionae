@@ -60,7 +60,13 @@ namespace Evolucionae
             this.cursosTipo = cursosT;
             this.soluciones = new List<int[]>();
         }
-       
+
+        public List<int[]> getSoluciones() {
+
+            return this.soluciones;
+        
+        
+        }
         /// <summary>
         /// <para>Genera una solución cualquiera para la persona, o, si no es posible
         /// con la piscina actual de cursos, se genera lo más cercano a una
