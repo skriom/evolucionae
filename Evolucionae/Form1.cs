@@ -15,6 +15,7 @@ namespace Evolucionae
         List<String> cursosP = new List<String>();
         List<Curso> cursos = new List<Curso>();
         List<Persona> personas = new List<Persona>();
+        List<AG1> listaAG1s = new List<AG1>();
         /// <summary>
         /// Diccionario que mapea cada tipo de curso (e.g. "inglés", "matemáticas")
         /// a la lista de cursos de ese tipo disponibles.
@@ -61,7 +62,7 @@ namespace Evolucionae
             cargarPersonas();
             cargarComboPersonas();
             this.initCursosTipo();
-            this.pruebaTonta();
+            //this.pruebaTonta();
             this.inicializarGridHorario();
         }
 
@@ -507,6 +508,33 @@ namespace Evolucionae
         { 
         
         }
+
+        private void btnAG1_Click(object sender, EventArgs e)
+        {
+            initCursosTipo();
+            //listaAG1s
+            AG1 ag1;
+            AG2 ag2;
+            List<List<int[]>> solIndependientes = new List<List<int[]>>();
+            for (int i = 0; i < personas.Count;i++ )
+            {
+                ag1 = new AG1(personas.ElementAt(i), cursosTipo);
+                listaAG1s.Add(ag1);
+                ag1.generarPoblacionInicial();
+                ag1.evolucionar();
+                solIndependientes.Add(ag1.getSoluciones());
+            }
+
+            ag2 = new AG2(personas, solIndependientes, cursosTipo);
+            ag2.evolucionar();
+
+
+
+
+       }
+
+
+        
         
 
         
