@@ -68,6 +68,7 @@ namespace Evolucionae
             this.distribucion = new List<Dictionary<Curso, int>>();
             this.solucionesIndependientes = soluciones;
             this.initNumCursos();
+            this.generarPoblacionInicial();
         }
         /// <summary>
         /// Calcula el número de cursos disponibles y lo almacena en this.numCursos
@@ -141,7 +142,7 @@ namespace Evolucionae
             //repetimos 30 veces o hasta que el cambio (medido con desvStd) sea menor que un cierto umbral
             for (int generaciones = 0; generaciones < 50 && desvStd > 5; ++generaciones)
             {
-                fitness = new double[this.soluciones.Count];
+                 fitness = new double[this.soluciones.Count];
                 vectorProbabilidades = new double[this.soluciones.Count];
                 media = desvStd = 0;
                 for (int i = 0; i < this.soluciones.Count; ++i)
@@ -251,7 +252,7 @@ namespace Evolucionae
                     resultado += 50 / numCursosUsados;
                 }
             }
-            //ahora calificamos si califica la necesidad de todas las personas. Este rubro vale 40%
+            //ahora calificamos si satisface la necesidad de todas las personas. Este rubro vale 40%
             //en el peor caso, no le asigna ningún curso a nadie. Entonces, la satisfacción de cada persona
             //vale 40/this.personas.Count. Para cada curso j de una persona, su satisfacción vale
             //40/(this.personas.Count*numOpcionesCurso(j))
@@ -260,17 +261,17 @@ namespace Evolucionae
             {
                 for (int c = 0; c < this.solucionesIndependientes[p][soluciones[individuo][p]].Length; ++c)
                 {
-                    cursoAlQueSeRefiere = this.cursosTipo[this.personas[p].cursosQueNecesita[c]][solucionesIndependientes[p][soluciones[individuo][p]][c]];
-                    if(this.solucionesIndependientes[p][soluciones[individuo][p]][c] != -1)
+                    if (this.solucionesIndependientes[p][soluciones[individuo][p]][c] != -1) //si se asignó el curso respectivo
                     {
-                        resultado += 40.0 / (this.personas.Count * this.cursosTipo[cursoAlQueSeRefiere.nombre].Count);
+                        cursoAlQueSeRefiere = this.cursosTipo[this.personas[p].cursosQueNecesita[c]][solucionesIndependientes[p][soluciones[individuo][p]][c]];
+                        resultado += 40.0 / (this.personas.Count * this.personas[p].cursosQueNecesita.Count); //this.cursosTipo[cursoAlQueSeRefiere.nombre].Count);
                     }
                 }
             }
             //ahora calificamos que no dejen cursos vacíos. Este rubro vale 10%
             //En el peor caso, todos los cursos quedan vacíos. Entonces, para cada curso, el no estar vacío
             //aporta 10/numCursosUsados puntos
-            resultado += this.numCursos * 10.0 / numCursosUsados;
+            resultado += numCursosUsados * 10.0 / this.numCursos;
             return resultado;
         }
         /// <summary>
@@ -340,14 +341,31 @@ namespace Evolucionae
                     //individuo[p] es la solución independiente asignada a la persona p. Es un int
                     //solucionesIndependientes[p][individuo[p]][c] es un número que indica el curso asignado. Es decir que se asignó
                     //solucionesIndependientes[p][individuo[p]][c] de los cursos de tipo personas[p].cursosQueNecesita[c]
-                    cursoAlQueSeRefiere = this.cursosTipo[this.personas[p].cursosQueNecesita[c]][solucionesIndependientes[p][individuo[p]][c]];
-                    if (!this.distribucion[this.distribucion.Count - 1].ContainsKey(cursoAlQueSeRefiere))
+                    if (solucionesIndependientes[p][individuo[p]][c] != -1) //si se asignó el curso respectivo
                     {
-                        this.distribucion[this.distribucion.Count - 1].Add(cursoAlQueSeRefiere, 0);
+                        cursoAlQueSeRefiere = this.cursosTipo[this.personas[p].cursosQueNecesita[c]][solucionesIndependientes[p][individuo[p]][c]];
+                        if (!this.distribucion[this.distribucion.Count - 1].ContainsKey(cursoAlQueSeRefiere))
+                        {
+                            this.distribucion[this.distribucion.Count - 1].Add(cursoAlQueSeRefiere, 0);
+                        }
+                        this.distribucion[this.distribucion.Count - 1][cursoAlQueSeRefiere] += 1;
                     }
-                    this.distribucion[this.distribucion.Count - 1][cursoAlQueSeRefiere] += 1;
                 }
             }
         }
-    }
+
+        public int[] listaSoluciones() {
+            return this.soluciones.ElementAt(0);
+        
+        }
+
+        public int[] listaSolucionesPersona(int posSol, int persona)
+        {
+            return this.solucionesIndependientes.ElementAt(persona).ElementAt(posSol);
+
+        }
+        
+        
+        
+        }
 }

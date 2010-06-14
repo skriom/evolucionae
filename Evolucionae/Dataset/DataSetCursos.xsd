@@ -67,7 +67,7 @@ FROM         Curso</CommandText>
               <DbSource ConnectionRef="ParadigmasConnectionString (Settings)" DbObjectName="Paradigmas.dbo.Curso" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="solicitarListaCurso" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="solicitarListaCurso" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="solicitarListaCurso" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT Nombre, Dia, Hora, Cupo
+                    <CommandText>SELECT     Nombre, Dia, Hora, Cupo, Id
 FROM         Curso</CommandText>
                     <Parameters />
                   </DbCommand>
@@ -79,6 +79,7 @@ FROM         Curso</CommandText>
               <Mapping SourceColumn="Dia" DataSetColumn="Dia" />
               <Mapping SourceColumn="Hora" DataSetColumn="Hora" />
               <Mapping SourceColumn="Cupo" DataSetColumn="Cupo" />
+              <Mapping SourceColumn="Id" DataSetColumn="Id" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -110,7 +111,7 @@ FROM         Curso</CommandText>
         <xs:element name="Curso" msprop:Generator_UserTableName="Curso" msprop:Generator_RowDeletedName="CursoRowDeleted" msprop:Generator_RowChangedName="CursoRowChanged" msprop:Generator_RowClassName="CursoRow" msprop:Generator_RowChangingName="CursoRowChanging" msprop:Generator_RowEvArgName="CursoRowChangeEvent" msprop:Generator_RowEvHandlerName="CursoRowChangeEventHandler" msprop:Generator_TableClassName="CursoDataTable" msprop:Generator_TableVarName="tableCurso" msprop:Generator_RowDeletingName="CursoRowDeleting" msprop:Generator_TablePropName="Curso">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_ColumnPropNameInTable="NombreColumn">
+              <xs:element name="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre" msprop:Generator_ColumnPropNameInTable="NombreColumn">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
@@ -123,23 +124,24 @@ FROM         Curso</CommandText>
         <xs:element name="obtenerListaCursos" msprop:Generator_UserTableName="obtenerListaCursos" msprop:Generator_RowDeletedName="obtenerListaCursosRowDeleted" msprop:Generator_RowChangedName="obtenerListaCursosRowChanged" msprop:Generator_RowClassName="obtenerListaCursosRow" msprop:Generator_RowChangingName="obtenerListaCursosRowChanging" msprop:Generator_RowEvArgName="obtenerListaCursosRowChangeEvent" msprop:Generator_RowEvHandlerName="obtenerListaCursosRowChangeEventHandler" msprop:Generator_TableClassName="obtenerListaCursosDataTable" msprop:Generator_TableVarName="tableobtenerListaCursos" msprop:Generator_RowDeletingName="obtenerListaCursosRowDeleting" msprop:Generator_TablePropName="obtenerListaCursos">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_ColumnPropNameInTable="NombreColumn">
+              <xs:element name="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre" msprop:Generator_ColumnPropNameInTable="NombreColumn">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Dia" msprop:Generator_UserColumnName="Dia" msprop:Generator_ColumnVarNameInTable="columnDia" msprop:Generator_ColumnPropNameInRow="Dia" msprop:Generator_ColumnPropNameInTable="DiaColumn" type="xs:int" />
-              <xs:element name="Hora" msprop:Generator_UserColumnName="Hora" msprop:Generator_ColumnVarNameInTable="columnHora" msprop:Generator_ColumnPropNameInRow="Hora" msprop:Generator_ColumnPropNameInTable="HoraColumn" type="xs:int" />
-              <xs:element name="Cupo" msprop:Generator_UserColumnName="Cupo" msprop:Generator_ColumnVarNameInTable="columnCupo" msprop:Generator_ColumnPropNameInRow="Cupo" msprop:Generator_ColumnPropNameInTable="CupoColumn" type="xs:int" />
+              <xs:element name="Dia" msprop:Generator_UserColumnName="Dia" msprop:Generator_ColumnPropNameInRow="Dia" msprop:Generator_ColumnVarNameInTable="columnDia" msprop:Generator_ColumnPropNameInTable="DiaColumn" type="xs:int" />
+              <xs:element name="Hora" msprop:Generator_UserColumnName="Hora" msprop:Generator_ColumnPropNameInRow="Hora" msprop:Generator_ColumnVarNameInTable="columnHora" msprop:Generator_ColumnPropNameInTable="HoraColumn" type="xs:int" />
+              <xs:element name="Cupo" msprop:Generator_UserColumnName="Cupo" msprop:Generator_ColumnPropNameInRow="Cupo" msprop:Generator_ColumnVarNameInTable="columnCupo" msprop:Generator_ColumnPropNameInTable="CupoColumn" type="xs:int" />
+              <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="Id" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInTable="IdColumn" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element name="obtenerNombreCursos" msprop:Generator_UserTableName="obtenerNombreCursos" msprop:Generator_RowDeletedName="obtenerNombreCursosRowDeleted" msprop:Generator_RowChangedName="obtenerNombreCursosRowChanged" msprop:Generator_RowClassName="obtenerNombreCursosRow" msprop:Generator_RowChangingName="obtenerNombreCursosRowChanging" msprop:Generator_RowEvArgName="obtenerNombreCursosRowChangeEvent" msprop:Generator_RowEvHandlerName="obtenerNombreCursosRowChangeEventHandler" msprop:Generator_TableClassName="obtenerNombreCursosDataTable" msprop:Generator_TableVarName="tableobtenerNombreCursos" msprop:Generator_RowDeletingName="obtenerNombreCursosRowDeleting" msprop:Generator_TablePropName="obtenerNombreCursos">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_ColumnPropNameInTable="NombreColumn">
+              <xs:element name="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre" msprop:Generator_ColumnPropNameInTable="NombreColumn">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
@@ -151,5 +153,9 @@ FROM         Curso</CommandText>
         </xs:element>
       </xs:choice>
     </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:obtenerListaCursos" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
   </xs:element>
 </xs:schema>

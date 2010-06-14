@@ -50,7 +50,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbPersonas = new System.Windows.Forms.TabPage();
-            this.btnAG2 = new System.Windows.Forms.Button();
             this.btnAG1 = new System.Windows.Forms.Button();
             this.ListaP = new System.Windows.Forms.ListBox();
             this.grpBxPersona = new System.Windows.Forms.GroupBox();
@@ -105,7 +104,7 @@
             this.tbCursos.Location = new System.Drawing.Point(3, 2);
             this.tbCursos.Name = "tbCursos";
             this.tbCursos.SelectedIndex = 0;
-            this.tbCursos.Size = new System.Drawing.Size(671, 449);
+            this.tbCursos.Size = new System.Drawing.Size(671, 468);
             this.tbCursos.TabIndex = 0;
             // 
             // tbCursoss
@@ -115,7 +114,7 @@
             this.tbCursoss.Location = new System.Drawing.Point(4, 22);
             this.tbCursoss.Name = "tbCursoss";
             this.tbCursoss.Padding = new System.Windows.Forms.Padding(3);
-            this.tbCursoss.Size = new System.Drawing.Size(663, 423);
+            this.tbCursoss.Size = new System.Drawing.Size(663, 442);
             this.tbCursoss.TabIndex = 0;
             this.tbCursoss.Text = "Cursos";
             this.tbCursoss.UseVisualStyleBackColor = true;
@@ -210,9 +209,9 @@
             // 
             // btnInsertarC
             // 
-            this.btnInsertarC.Location = new System.Drawing.Point(249, 97);
+            this.btnInsertarC.Location = new System.Drawing.Point(268, 97);
             this.btnInsertarC.Name = "btnInsertarC";
-            this.btnInsertarC.Size = new System.Drawing.Size(75, 23);
+            this.btnInsertarC.Size = new System.Drawing.Size(75, 32);
             this.btnInsertarC.TabIndex = 10;
             this.btnInsertarC.Text = "Insertar";
             this.btnInsertarC.UseVisualStyleBackColor = true;
@@ -309,7 +308,6 @@
             // 
             // tbPersonas
             // 
-            this.tbPersonas.Controls.Add(this.btnAG2);
             this.tbPersonas.Controls.Add(this.btnAG1);
             this.tbPersonas.Controls.Add(this.ListaP);
             this.tbPersonas.Controls.Add(this.grpBxPersona);
@@ -317,36 +315,27 @@
             this.tbPersonas.Location = new System.Drawing.Point(4, 22);
             this.tbPersonas.Name = "tbPersonas";
             this.tbPersonas.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPersonas.Size = new System.Drawing.Size(663, 423);
+            this.tbPersonas.Size = new System.Drawing.Size(663, 442);
             this.tbPersonas.TabIndex = 1;
             this.tbPersonas.Text = "Personas";
             this.tbPersonas.UseVisualStyleBackColor = true;
             // 
-            // btnAG2
-            // 
-            this.btnAG2.Location = new System.Drawing.Point(478, 146);
-            this.btnAG2.Name = "btnAG2";
-            this.btnAG2.Size = new System.Drawing.Size(141, 55);
-            this.btnAG2.TabIndex = 30;
-            this.btnAG2.Text = "AG2";
-            this.btnAG2.UseVisualStyleBackColor = true;
-            // 
             // btnAG1
             // 
-            this.btnAG1.Location = new System.Drawing.Point(478, 45);
+            this.btnAG1.Location = new System.Drawing.Point(304, 389);
             this.btnAG1.Name = "btnAG1";
-            this.btnAG1.Size = new System.Drawing.Size(141, 55);
+            this.btnAG1.Size = new System.Drawing.Size(86, 34);
             this.btnAG1.TabIndex = 29;
-            this.btnAG1.Text = "AG1";
+            this.btnAG1.Text = "Iniciar";
             this.btnAG1.UseVisualStyleBackColor = true;
             this.btnAG1.Click += new System.EventHandler(this.btnAG1_Click);
             // 
             // ListaP
             // 
             this.ListaP.FormattingEnabled = true;
-            this.ListaP.Location = new System.Drawing.Point(275, 13);
+            this.ListaP.Location = new System.Drawing.Point(393, 22);
             this.ListaP.Name = "ListaP";
-            this.ListaP.Size = new System.Drawing.Size(158, 212);
+            this.ListaP.Size = new System.Drawing.Size(158, 186);
             this.ListaP.TabIndex = 28;
             // 
             // grpBxPersona
@@ -355,9 +344,9 @@
             this.grpBxPersona.Controls.Add(this.btnAgregarPersona);
             this.grpBxPersona.Controls.Add(this.txtNombreP);
             this.grpBxPersona.Controls.Add(this.label5);
-            this.grpBxPersona.Location = new System.Drawing.Point(6, 231);
+            this.grpBxPersona.Location = new System.Drawing.Point(60, 231);
             this.grpBxPersona.Name = "grpBxPersona";
-            this.grpBxPersona.Size = new System.Drawing.Size(427, 132);
+            this.grpBxPersona.Size = new System.Drawing.Size(559, 128);
             this.grpBxPersona.TabIndex = 27;
             this.grpBxPersona.TabStop = false;
             this.grpBxPersona.Text = "Persona";
@@ -369,7 +358,7 @@
             this.gbCursosP.Controls.Add(this.label6);
             this.gbCursosP.Controls.Add(this.btnInsertarP);
             this.gbCursosP.Enabled = false;
-            this.gbCursosP.Location = new System.Drawing.Point(180, 19);
+            this.gbCursosP.Location = new System.Drawing.Point(280, 15);
             this.gbCursosP.Name = "gbCursosP";
             this.gbCursosP.Size = new System.Drawing.Size(231, 99);
             this.gbCursosP.TabIndex = 28;
@@ -415,9 +404,9 @@
             // 
             // btnAgregarPersona
             // 
-            this.btnAgregarPersona.Location = new System.Drawing.Point(59, 79);
+            this.btnAgregarPersona.Location = new System.Drawing.Point(102, 71);
             this.btnAgregarPersona.Name = "btnAgregarPersona";
-            this.btnAgregarPersona.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarPersona.Size = new System.Drawing.Size(75, 30);
             this.btnAgregarPersona.TabIndex = 17;
             this.btnAgregarPersona.Text = "Insertar";
             this.btnAgregarPersona.UseVisualStyleBackColor = true;
@@ -425,7 +414,7 @@
             // 
             // txtNombreP
             // 
-            this.txtNombreP.Location = new System.Drawing.Point(57, 23);
+            this.txtNombreP.Location = new System.Drawing.Point(102, 23);
             this.txtNombreP.Name = "txtNombreP";
             this.txtNombreP.Size = new System.Drawing.Size(117, 20);
             this.txtNombreP.TabIndex = 15;
@@ -433,7 +422,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 26);
+            this.label5.Location = new System.Drawing.Point(49, 26);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(47, 13);
             this.label5.TabIndex = 13;
@@ -448,11 +437,11 @@
             this.nombreDataGridViewTextBoxColumn,
             this.Eliminar2});
             this.dgvPersonas.DataSource = this.obtenerListaPersonasBindingSource;
-            this.dgvPersonas.Location = new System.Drawing.Point(6, 6);
+            this.dgvPersonas.Location = new System.Drawing.Point(121, 22);
             this.dgvPersonas.Name = "dgvPersonas";
             this.dgvPersonas.ReadOnly = true;
             this.dgvPersonas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPersonas.Size = new System.Drawing.Size(248, 219);
+            this.dgvPersonas.Size = new System.Drawing.Size(248, 185);
             this.dgvPersonas.TabIndex = 0;
             this.dgvPersonas.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPersonas_RowHeaderMouseClick);
             this.dgvPersonas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonas_CellContentClick);
@@ -680,7 +669,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn Eliminar2;
         private System.Windows.Forms.Button btnListo;
         private System.Windows.Forms.Button btnAG1;
-        private System.Windows.Forms.Button btnAG2;
     }
 }
 

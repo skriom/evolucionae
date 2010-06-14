@@ -48,8 +48,9 @@ namespace Evolucionae
         public const int VIERNES = 4;
         public const int SABADO = 5;
 
-        int[] solucion= new int[70];
-
+        
+        AG1 ag1;
+        AG2 ag2;
         BDCurso bdc= new BDCurso();
         BDPersona bdp = new BDPersona(); 
         public Form1()
@@ -61,7 +62,7 @@ namespace Evolucionae
             cargarComboCursos();
             cargarPersonas();
             cargarComboPersonas();
-            this.initCursosTipo();
+            //this.initCursosTipo();
             //this.pruebaTonta();
             this.inicializarGridHorario();
         }
@@ -277,6 +278,7 @@ namespace Evolucionae
             this.txtNombreP.Text = "";
             this.cmbCursos.SelectedIndex = -1;
             gbCursosP.Enabled = false;
+            cursosP.Clear();
         }
         
         #endregion "Persona"
@@ -352,36 +354,41 @@ namespace Evolucionae
         
         private void btnMostrar_Click(object sender, EventArgs e)
         {
-            this.inicializarSolucion();
-            int contador = 0;
-            for(int i=0; i<14; i++){
-                contador = i;
-                for(int j=1; j<6; j++){
-                    if (contador < 70)
-                    {
+            dgvHorario.Rows.Clear();
+            Curso c;
+            int persona = this.cmbPersonas.SelectedIndex;
+            if (persona!=-1)
+            {
+            
+            inicializarGridHorario();
 
-//                     dgvHorario.Rows[i].Cells[j].Value = solucion[contador].ToString();
-                        dgvHorario.Rows[i].Cells[j].Value = cursos.ElementAt(solucion[contador]).nombre;
-                     contador += 14;
-                    }
+            int[] solucionFinal = ag2.listaSoluciones();
+
+            int[] vectorSol = ag2.listaSolucionesPersona(solucionFinal.ElementAt(persona), persona);
+
+            for (int i = 0; i<vectorSol.Count(); i++)
+            {
+                if (vectorSol.ElementAt(i) != -1)
+                {
+                    c = this.cursosTipo[personas.ElementAt(persona).cursosQueNecesita.ElementAt(i)][vectorSol.ElementAt(i)];
+                    dgvHorario.Rows[c.hora-7].Cells[c.dia+1].Value = c.nombre;
+                    dgvHorario.Rows[c.hora-6].Cells[c.dia+1].Value = c.nombre;
                 }
             }
+
+            }else{
+                MessageBox.Show("Debe seleccionar una persona", "Mostrar horario");
+            
+            
+            }
+
+
+            
             
 
         }
 
-        private void inicializarSolucion() {
-
-            for (int i = 0; i < 70;i++ )
-            {
-                     solucion[i] = 0;
-            }
-            for (int i = 0; i < 70; i += 2)
-            {
-                solucion[i] = 1;
-            }
         
-        }
  
         private void dgvPersonas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -513,8 +520,7 @@ namespace Evolucionae
         {
             initCursosTipo();
             //listaAG1s
-            AG1 ag1;
-            AG2 ag2;
+            
             List<List<int[]>> solIndependientes = new List<List<int[]>>();
             for (int i = 0; i < personas.Count;i++ )
             {
@@ -528,7 +534,7 @@ namespace Evolucionae
             ag2 = new AG2(personas, solIndependientes, cursosTipo);
             ag2.evolucionar();
 
-
+            MessageBox.Show("Los horarios han sido generados", "Horarios");
 
 
        }
