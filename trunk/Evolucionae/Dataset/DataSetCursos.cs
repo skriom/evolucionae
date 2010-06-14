@@ -5,7 +5,7 @@
     }
 }
 
-namespace Evolucionae.Dataset.DataSetCursosTableAdapters
+namespace Evolucionae.DataSetCursosTableAdapters
 {
     
     

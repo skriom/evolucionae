@@ -64,6 +64,7 @@ namespace Evolucionae
             c.dia = (int)lista.GetValue(1);
             c.hora = (int)lista.GetValue(2);
             c.cupo = (int)lista.GetValue(3);
+            c.id = (int)lista.GetValue(4);
 
             listaC.Add(c);
         }
