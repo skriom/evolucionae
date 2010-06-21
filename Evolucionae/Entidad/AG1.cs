@@ -277,8 +277,8 @@ namespace Evolucionae
                 int posicionDelUltimoPadre = nuevaPoblacion.Count;
                 for (int i = 0; i < posicionDelUltimoPadre; i+=2)
                 {
-                    nuevaPoblacion.Add(this.corregirSolucion(this.mutar(this.cruzar(nuevaPoblacion[i], nuevaPoblacion[i + 1], corte, true))));
-                    nuevaPoblacion.Add(this.corregirSolucion(this.mutar(this.cruzar(nuevaPoblacion[i], nuevaPoblacion[i + 1], corte, false))));
+                    nuevaPoblacion.Add(this.corregirSolucion(this.mutar(this.cruzar(nuevaPoblacion[i], nuevaPoblacion[i + 1], corte))));
+                    nuevaPoblacion.Add(this.corregirSolucion(this.mutar(this.cruzar(nuevaPoblacion[i + 1], nuevaPoblacion[i], corte))));
                 }
                 //ahora tenemos una nueva poblacion
                 this.soluciones = nuevaPoblacion.Clone(); // :)
@@ -317,7 +317,7 @@ namespace Evolucionae
                 individuo[posicionGen]--;
             }
             else{
-                if(this.cursosTipo[this.persona.cursosQueNecesita[posicionGen]].Count > individuo[posicionGen])
+                if(this.cursosTipo[this.persona.cursosQueNecesita[posicionGen]].Count > individuo[posicionGen] + 1)
                 {
                     individuo[posicionGen]++;
                 }
@@ -337,30 +337,16 @@ namespace Evolucionae
         /// <param name="pImD">si es true, los genes antes del corte los aporta el padre
         /// y los demás la madre. Al revés si es false</param>
         /// <returns>Un nuevo individuo con genes parte del padre, parte de la madre</returns>
-        private int[] cruzar(int[] padre, int[] madre, int corte, bool pImD)
+        private int[] cruzar(int[] padre, int[] madre, int corte)
         {
             int[] resultado = new int[padre.Length];
-            if (pImD)
+            for (int i = 0; i < corte; ++i)
             {
-                for (int i = 0; i < corte; ++i)
-                {
-                    resultado[i] = padre[i];
-                }
-                for (int i = corte; i < madre.Length; ++i)
-                {
-                    resultado[i] = madre[i];
-                }
+                resultado[i] = padre[i];
             }
-            else
+            for (int i = corte; i < madre.Length; ++i)
             {
-                for (int i = 0; i < corte; ++i)
-                {
-                    resultado[i] = madre[i];
-                }
-                for (int i = corte; i < padre.Length; ++i)
-                {
-                    resultado[i] = padre[i];
-                }
+                resultado[i] = madre[i];
             }
             return resultado;
         }
