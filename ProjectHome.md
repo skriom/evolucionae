@@ -1,0 +1,2 @@
+Este programa recibe como entrada un conjunto de cursos y un conjunto de personas. Cada persona quiere llevar cursos.
+Se una un primer algoritmo genético sobre cada persona para encontrar la mejor combinación de cursos (no pueden chocar) y luego, un segundo algoritmo genético para escoger la mejor combinación de soluciones individuales de cada persona (donde todos puedan asistir a sus cursos, dadas las limitantes de cupo y donde la población de los cursos sea lo más uniformemente distribuida)
